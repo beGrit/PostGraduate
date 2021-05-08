@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="outer">
+    <div id="content">
+        <div id="basic-info">
+            <div id="basic-info-avatar">
+                <img src="../image/pocky.png" size="50" width="50" height="50">
+            </div>
+            <div id="basic-info-t">
+                <h6 id="nick-name">pocky1314</h6>
+                <p id="basic-info-t-target">
+                    <span>北京大学</span>
+                    <span>软件工程</span>
+                </p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div id="">
+        </div>
+    </div>
+    <div id="up"></div>
+    <div id="down"></div>
+</div>
+</body>
+<style>
+    div {
+        border: 0.2px outset green;
+    }
+
+    .divider {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0.2px dotted #dddddd;
+    }
+    #outer {
+        position: relative;
+        width: 375px;
+        height: 200px;
+    }
+
+    #up {
+        background-color: coral;
+        height: 100px;
+    }
+
+    #down {
+        height: 100px;
+    }
+
+    #content {
+        background: #fff;
+        position: absolute;
+        margin-left: 37px;
+        margin-top: 30px;
+        width: 300px;
+        height: 140px;
+        border-radius: 30px;
+        box-shadow: 1px 2px 3px #ddd;
+    }
+
+    #basic-info {
+        width: 273px;
+        height: 50px;
+        margin-top: 20px;
+        margin-left: 13px;
+
+    }
+
+    #basic-info div {
+        display: inline-block;
+        float: left;
+    }
+
+    #basic-info-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    #basic-info-avatar img {
+        display: inline-block;
+        overflow: hidden;
+        line-height: 1;
+        vertical-align: middle;
+        border-radius: 50% !important;
+        box-shadow: 1px 2px 3px #dddddd;
+        flex-shrink: 0;
+    }
+    #basic-info-t {
+        width: 170px;
+        height: 50px;
+    }
+
+    #nick-name {
+        margin: 0;
+    }
+
+    #basic-info-t-target {
+        margin: 0;
+    }
+</style>
+</html>

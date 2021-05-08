@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<header>
+    <div id="logo">
+        <div id="logo_img"><img src="img/logo.png"/></div>
+        <div id="logo_App"><h3>考研App</h3></div>
+    </div>
+</header>
+<section>
+    <div id="login_msg">
+        <h1>验证码登录/注册</h1>
+        <h3>新用户登录后将自动创建账号</h3>
+    </div>
+    <!--//表单-->
+    <form id="login-form">
+        <div>
+            <div id="account">
+                <label for="account-input">账号：</label>
+                <input type="text" name="phone" id="account-input" class="invalid-input" placeholder="请输入5~10位账号"
+                       minlength="5" maxlength="10" required/>
+            </div>
+            <div id="password">
+                <label for="psd-input">密码：</label>
+                <input type="password" name="password" id="psd-input" class="invalid-input" placeholder="请输入5~10位密码"
+                       minlength="5" maxlength="10" required/>
+            </div>
+            <div id="check-box-wrapper">
+                <label for="user-agreement-checkbox"></label>
+                <input type="checkbox" id="user-agreement-checkbox" required/>
+                <span id="check_msg">
+						《用户协议》《用户个人信息保护政策》
+                </span>
+            </div>
+            <div id="sub">
+                <input type="submit" id="sub-btn" value="登录" required/>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+<script>
+
+    const submitHandler = function (e) {
+        e.preventDefault();
+        const ac_i = document.querySelector("#account-input");
+        const psd_i = document.querySelector("#psd-input");
+        const ugc_i = document.querySelector("#user-agreement-checkbox");
+        if (ugc_i.checked === false) {
+            alert("请选择遵循协议!");
+        }
+        let formData = new FormData(login_form);
+    }
+
+    let LoginHandler = {
+
+        login_form: document.querySelector("#login-form"),
+        account: document.querySelector("#account-input"),
+        password: document.querySelector("#psd-input"),
+        checkbox: document.querySelector("#user-agreement-checkbox"),
+
+        submit: function (e) {
+            e.preventDefault()
+            // 校验表单
+            let isValid = this.verify(this.account.value, this.password.value, this.checkbox.checked);
+
+            if (isValid === false) {
+
+            } else {
+                // 发送数据给服务器
+                this.sendData()
+            }
+        },
+
+        // 校验提交的数据
+        verify: function (account, password, checkbox) {
+            console.log(account)
+            return true;
+        },
+
+        // 发送ajax请求到后端
+        sendData: function () {
+            let form_data = new FormData(this.login_form)
+            let request = new XMLHttpRequest()
+            request.open("POST", "/login")
+            request.addEventListener("load", this.loginSuccess)
+            request.addEventListener("error", this.loginFailed)
+            request.send(form_data)
+        },
+
+        loginSuccess: function () {
+            console.log("登录成功")
+        },
+
+        loginFailed: function () {
+            console.log("登录失败")
+        }
+    }
+    // 给 login_form 表单绑定监听事件
+    // login_form.addEventListener("submit", evt => {
+    //    LoginHandler.submit(evt)
+    // });
+    const login_form = document.querySelector("#login-form")
+    login_form.addEventListener("submit", LoginHandler.submit.bind(LoginHandler));
+
+</script>
+</html>
