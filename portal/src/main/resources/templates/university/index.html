@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/css/university.css"/>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script charset="utf-8" src="https://webapi.amap.com/maps?v=1.4.15&key=4b329cf49e6598c25d1cf6a9ca835514"></script>
+</head>
+<body>
+<div id="app">
+    <header>
+        <div id="university_box">
+            <div id="share_msg">
+                <div id="grade_box">
+                    <div id="grade"></div>
+                    <span>分数线</span>
+                </div>
+                <div>
+                    <div id="blb_box"></div>
+                    <span>报录比</span>
+                </div>
+                <div>
+                    <div id="ex_box"></div>
+                    <span>备考经验</span>
+                </div>
+                <div>
+                    <div id="label_box"></div>
+                    <span>Label</span>
+                </div>
+            </div>
+            <div id="university_img">
+                <!--<img src="img/12.png"/>-->
+                <div id="university_msg">
+                    <div id="university_name"><span>{{ university.name }}</span></div>
+                    <div id="university_professional"><span>软件工程</span></div>
+                </div>
+                <div id="university_nature">
+                    <p>
+                        <span v-if="university.isJBW === 1">985</span>
+                        <span v-if="university.isEYY === 1">211</span>
+                        <span v-if="university.isZHX === 1">自主划线</span>
+                        <span>综合排名{{ university.rank }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div id="map">
+            <!--            <h2>地理位置</h2>
+                        <iframe src="https://www.baidu.com/?tn=88093251_34_hao_pg" frameborder="0"></iframe>-->
+        </div>
+        <div id="College_counseling_box">
+            <h2>院校咨询</h2>
+            <div id="College_counseling">
+                ×
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data() {
+            return {
+                university: {}
+            }
+        },
+        methods: {
+            initMap: function (longitude, latitude) {
+                console.log("定位中:" + longitude + ',' + latitude);
+                const map = new AMap.Map('map', {
+                    resizeEnable: true,
+                    center: [longitude, latitude],
+                    zoom: 13,
+                });
+            }
+        },
+        created: function () {
+            $.ajax({
+                url: '/portal/university/id/1',
+                type: 'GET',
+                dataType: 'json',
+                timeout: 1000,
+                cache: false,
+                beforeSend: () => {
+                }, //加载执行方法
+                error: () => {
+                },  //错误执行方法
+                success: (tt) => {
+                    var json = eval(tt); //数组
+                    var tt = "";
+                    this.university = json.data.university
+                    this.initMap(this.university.location.longitude, this.university.location.latitude);
+                }
+            });
+        },
+        mounted: function () {
+
+        }
+    });
+</script>
+</body>
+</html>

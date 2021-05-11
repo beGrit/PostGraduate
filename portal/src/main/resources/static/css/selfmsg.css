@@ -1,0 +1,26 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+header{
+	width: 100%;
+	height: auto;
+	border: 1px salmon solid;
+}
+#titile{
+	width: 100%;
+	height: 100px;
+	
+}
+#titile span{
+	font-size: 40px;
+	display: inline-block;
+	float: left;
+	line-height: 100px;
+	padding: 0 30px;
+}
+#titile h3{
+	font-size: 45px;
+	line-height: 100px;
+	text-align: center;
+}
