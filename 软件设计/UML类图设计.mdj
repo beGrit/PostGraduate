@@ -8972,7 +8972,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5RgjbcAA0ljo="
 							},
-							"name": "id"
+							"name": "id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
