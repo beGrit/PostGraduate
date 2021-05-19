@@ -13,6 +13,8 @@
         <module>persistence</module>
         <module>portal</module>
         <module>common</module>
+        <module>dao</module>
+        <module>bean</module>
     </modules>
 
     <parent>

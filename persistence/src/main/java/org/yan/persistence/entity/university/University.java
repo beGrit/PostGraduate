@@ -18,7 +18,6 @@ public class University {
     /**
      * 是否为研究生院校 (0 不是, 1 是)
      */
-    @Pattern(regexp = "0|1")
     private int isYJSY;
 
     /**
@@ -49,11 +48,11 @@ public class University {
     /**
      * 该院校所在的城市
      */
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToOne(optional = false)
+    @OneToOne
     @JoinColumn(name = "location_id")
     private Location location;
 

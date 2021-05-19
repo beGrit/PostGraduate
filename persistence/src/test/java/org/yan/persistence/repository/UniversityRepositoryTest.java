@@ -19,11 +19,17 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 class UniversityRepositoryTest {
     @Autowired
-    UniversityRepository repository;
+    UniversityRepository universityRepository;
+
+    @Autowired
+    CityRepository cityRepository;
+
+    @Autowired
+    LocationRepository locationRepository;
 
     @Test
     void testQueryAll() {
-        List<University> universities = (List<University>) repository.findAll();
+        List<University> universities = (List<University>) universityRepository.findAll();
 //        Long city = universities.get(0).getCity();
         String city = universities.get(0).getCity();
         System.out.println(city);
@@ -32,7 +38,7 @@ class UniversityRepositoryTest {
     @Test
     void findAllByIsYJSYEquals() {
         Pageable first = PageRequest.of(0, 2).first();
-        Page<University> list = repository.findByNameIs("北京大学", first);
+        Page<University> list = universityRepository.findByNameIs("北京大学", first);
         System.out.println(list.getTotalPages());
         list.getTotalElements();
         list.stream().forEach(System.out::println);
@@ -40,22 +46,26 @@ class UniversityRepositoryTest {
 
     @Test
     void saveTest() {
-        City beijing = new City("北京市");
-
-        University beida = new University(
-                "北京大学", 1, 1, 1, 1, 1, "www.beida.com"
+        University hzdx = new University(
+                "杭州大学", 1, 1, 20, 0, 0, "www.hzdx.com"
         );
-        Location beijingLocation = new Location(1.0, 1.0);
+        hzdx.setId(1L);
 
-        beida.setCity(beijing);
-        beida.setLocation(beijingLocation);
+        Optional<Location> byId = locationRepository.findById(5L);
+        Location location = byId.get();
 
-        repository.save(beida);
+        City hz = cityRepository.findByNameIs("杭州");
+
+
+        hzdx.setLocation(location);
+        hzdx.setCity(hz);
+
+        universityRepository.save(hzdx);
     }
 
     @Test
     void testFindLocationById() {
-        Optional<University> universityOptional = repository.findById(1L);
+        Optional<University> universityOptional = universityRepository.findById(1L);
         universityOptional.ifPresent(university -> {
             System.out.println(university.getLocation());
         });
@@ -63,7 +73,7 @@ class UniversityRepositoryTest {
 
     @Test
     void testFindAllLocation() {
-        Iterable<University> universities = repository.findAll();
+        Iterable<University> universities = universityRepository.findAll();
         universities.forEach(university -> {
             System.out.println(university.getLocation());
         });

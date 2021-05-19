@@ -21,7 +21,7 @@ public class Location {
      */
     private Double latitude;
 
-    @OneToOne(optional = false, mappedBy = "location")
+    @OneToOne(mappedBy = "location")
     private University university;
 
     public Long getId() {
