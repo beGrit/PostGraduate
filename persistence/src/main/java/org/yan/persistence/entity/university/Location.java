@@ -3,6 +3,8 @@ package org.yan.persistence.entity.university;
 import org.yan.persistence.entity.university.University;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "UMS_LOCATION")
@@ -52,6 +54,12 @@ public class Location {
     }
 
     public Location(Double longitude, Double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    public Location(Long id, Double longitude, Double latitude) {
+        this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
     }

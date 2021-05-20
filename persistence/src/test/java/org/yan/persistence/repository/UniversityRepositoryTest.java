@@ -1,6 +1,7 @@
 package org.yan.persistence.repository;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestReporter;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.yan.persistence.entity.university.City;
 import org.yan.persistence.entity.university.Location;
 import org.yan.persistence.entity.university.University;
@@ -45,17 +47,14 @@ class UniversityRepositoryTest {
     }
 
     @Test
+    @Transactional
     void saveTest() {
-        University hzdx = new University(
-                "杭州大学", 1, 1, 20, 0, 0, "www.hzdx.com"
-        );
-        hzdx.setId(1L);
+        University hzdx = new University(11L, "杭州大学", 1, 1, 20, 0, 0, "www.hzdx.com");
 
-        Optional<Location> byId = locationRepository.findById(5L);
+        Optional<Location> byId = locationRepository.findById(3L);
         Location location = byId.get();
 
         City hz = cityRepository.findByNameIs("杭州");
-
 
         hzdx.setLocation(location);
         hzdx.setCity(hz);
@@ -77,5 +76,16 @@ class UniversityRepositoryTest {
         universities.forEach(university -> {
             System.out.println(university.getLocation());
         });
+    }
+
+    @Test
+    void existsUniversityByLocation_Id() {
+        // case 1
+        boolean b1 = universityRepository.existsUniversityByLocation_Id(7L);
+        assert b1;
+
+        // case 2
+        boolean b2 = universityRepository.existsUniversityByLocation_Id(1L);
+        assert !b2;
     }
 }

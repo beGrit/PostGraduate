@@ -49,11 +49,11 @@ public class University {
      * 该院校所在的城市
      */
     @ManyToOne
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
     @OneToOne
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
     public Long getId() {
@@ -140,6 +140,17 @@ public class University {
     }
 
     public University(String name, int isYJSY, int isZHX, int rank, int isJBW, int isEYY, String officialUrl) {
+        this.name = name;
+        this.isYJSY = isYJSY;
+        this.isZHX = isZHX;
+        this.rank = rank;
+        this.isJBW = isJBW;
+        this.isEYY = isEYY;
+        this.officialUrl = officialUrl;
+    }
+
+    public University(Long id, String name, int isYJSY, int isZHX, int rank, int isJBW, int isEYY, String officialUrl) {
+        this.id = id;
         this.name = name;
         this.isYJSY = isYJSY;
         this.isZHX = isZHX;

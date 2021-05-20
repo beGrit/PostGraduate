@@ -13,6 +13,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = {"/admin/university"})
 public class UniversityController {
+
     @Autowired
     UniversityService universityService;
 

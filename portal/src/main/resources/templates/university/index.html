@@ -10,6 +10,8 @@
 </head>
 <body>
 <div id="app">
+    <input v-model="queryUid">
+    <button @click="checkoutUniversity(queryUid)">切换</button>
     <header>
         <div id="university_box">
             <div id="share_msg">
@@ -50,8 +52,6 @@
 
     <section>
         <div id="map">
-            <!--            <h2>地理位置</h2>
-                        <iframe src="https://www.baidu.com/?tn=88093251_34_hao_pg" frameborder="0"></iframe>-->
         </div>
         <div id="College_counseling_box">
             <h2>院校咨询</h2>
@@ -66,10 +66,31 @@
         el: "#app",
         data() {
             return {
-                university: {}
+                university: {},
+                queryUid: 1,
             }
         },
         methods: {
+            checkoutUniversity: function (queryUid) {
+                console.log(queryUid);
+                $.ajax({
+                    url: '/portal/university/id/' + queryUid,
+                    type: 'GET',
+                    dataType: 'json',
+                    timeout: 1000,
+                    cache: false,
+                    beforeSend: () => {
+                    }, //加载执行方法
+                    error: () => {
+                    },  //错误执行方法
+                    success: (tt) => {
+                        var json = eval(tt); //数组
+                        var tt = "";
+                        this.university = json.data.university
+                        this.initMap(this.university.location.longitude, this.university.location.latitude);
+                    }
+                });
+            },
             initMap: function (longitude, latitude) {
                 console.log("定位中:" + longitude + ',' + latitude);
                 const map = new AMap.Map('map', {
@@ -77,30 +98,14 @@
                     center: [longitude, latitude],
                     zoom: 13,
                 });
-            }
+            },
         },
         created: function () {
-            $.ajax({
-                url: '/portal/university/id/1',
-                type: 'GET',
-                dataType: 'json',
-                timeout: 1000,
-                cache: false,
-                beforeSend: () => {
-                }, //加载执行方法
-                error: () => {
-                },  //错误执行方法
-                success: (tt) => {
-                    var json = eval(tt); //数组
-                    var tt = "";
-                    this.university = json.data.university
-                    this.initMap(this.university.location.longitude, this.university.location.latitude);
-                }
-            });
+            this.checkoutUniversity(1);
         },
         mounted: function () {
 
-        }
+        },
     });
 </script>
 </body>

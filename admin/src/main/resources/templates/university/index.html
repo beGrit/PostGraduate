@@ -47,7 +47,7 @@
         <tr>
             <th>
                 <div>
-                    <input type="checkbox" @click="selectAll" :value="checkAll">
+                    <input type="checkbox" @click="selectAll(isAllChecked)" :value="isAllChecked">
                 </div>
             </th>
             <th v-for="th in ths">{{ th }}</th>
@@ -58,7 +58,7 @@
         <tr v-for="item in universities" v-if="universities != null && universities.length != 0">
             <td>
                 <div>
-                    <input type="checkbox" name="idList" :value="item.id" checked>
+                    <input type="checkbox" name="idList" :value="item.id" checked @click="addId">
                 </div>
             </td>
             <td>{{ item.id }}</td>
@@ -72,23 +72,6 @@
         <div v-else>
             暂无数据
         </div>
-        <!--
-                <tr th:each="item:${universities}">
-                    <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i
-                                class="layui-icon">&#xe605;</i>
-                        </div>
-                    </td>
-                    &lt;!&ndash;/*@thymesVar id="item" type="org.yan.persistence.entity.university.University"*/&ndash;&gt;
-                    <td th:text="${item.id}"></td>
-                    <td th:text="${item.name}"></td>
-                    <td th:text="${item.isYJSY}"></td>
-                    <td th:text="${item.isZHX}"></td>
-                    <td>
-                        <button @click="showDetail">详情</button>
-                    </td>
-                </tr>
-        -->
         </tbody>
     </table>
     <div :class="detailModalClass">
@@ -115,7 +98,20 @@
         </div>
     </div>
     <!--分页条-->
-    <div></div>
+    <div class="page">
+        <div>
+            <a class="prev"
+               href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${pageBar.prePageIndex}">&lt;&lt;</a>
+
+            <span class="current">${index}</span>
+
+            <a class="num"
+               href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${index}">${index}</a>
+
+            <a class="next"
+               href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${pageBar.nextPageIndex}">&gt;&gt;</a>
+        </div>
+    </div>
 </div>
 <script>
     new Vue({
@@ -144,7 +140,7 @@
                     "modal-hide": true,
                     "modal-show": false,
                 },
-                allChecked: false,
+                isAllChecked: false,
             }
         },
         computed: {
@@ -153,6 +149,33 @@
             }
         },
         methods: {
+            // to backend methods
+            fetchUniversityPage() {
+                $.ajax({
+                    url: '/api/admin/university/page',
+                    type: 'GET',
+                    dataType: 'json',
+                    timeout: 1000,
+                    cache: false,
+                    beforeSend: LoadFunction1, //加载执行方法
+                    error: erryFunction1,  //错误执行方法
+                    success: (tt) => {
+                        var json = eval(tt); //数组
+                        var tt = "";
+                        this.universities = json.universities;
+                    }
+                })
+
+                function LoadFunction1() {
+                    // $("#list3").html('加载中...');
+                }
+
+                function erryFunction1() {
+                    alert("error");
+                }
+            },
+
+            // basic javascript methods
             showDetail: function (item) {
                 this.curItem = item;
                 this.detailModalClass["modal-show"] = true;
@@ -163,39 +186,21 @@
                 this.detailModalClass["modal-show"] = false;
                 this.detailModalClass["modal-hide"] = true;
             },
+            selectAll: function (isAllChecked) {
+                console.log(isAllChecked);
+            },
+            checkAll() {
 
-            selectAll: function () {
+            },
+            addId() {
 
-            }
-            // modified: function (item) {
-            //     console.log(item.isZHX)
-            // }
+            },
+        },
+        created: function () {
+            this.fetchUniversityPage();
         },
         mounted: function () {
-            $.ajax({
-                url: '/api/admin/university/page',
-                type: 'GET',
-                dataType: 'json',
-                timeout: 1000,
-                cache: false,
-                beforeSend: LoadFunction1, //加载执行方法
-                error: erryFunction1,  //错误执行方法
-                success: (tt) => {
-                    var json = eval(tt); //数组
-                    var tt = "";
-                    this.universities = json.universities;
-                    console.log(this.cols);
-                    console.log(json);  //成功执行方法
-                }
-            })
 
-            function LoadFunction1() {
-                // $("#list3").html('加载中...');
-            }
-
-            function erryFunction1() {
-                alert("error");
-            }
         }
     });
 </script>

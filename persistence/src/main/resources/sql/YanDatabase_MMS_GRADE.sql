@@ -6,7 +6,7 @@ create table MMS_GRADE
     maxGrade         int          null,
     minGrade         int          null,
     numberOfExaminee int          null,
-    year             varchar(255) null
+    year             varchar(255) not null
 )
     engine = MyISAM;
 

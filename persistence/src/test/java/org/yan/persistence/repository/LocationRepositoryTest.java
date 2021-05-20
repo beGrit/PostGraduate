@@ -13,38 +13,49 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 class LocationRepositoryTest {
     @Autowired
-    LocationRepository repository;
+    LocationRepository locationRepository;
 
     @Test
     void save() {
         Location location = new Location(110.0, 100.0);
         location.setId(4L);
-        location = repository.save(location);
+        location = locationRepository.save(location);
         System.out.println(location.getId());
     }
 
     @Test
     void testFindAll() {
-        Iterable<Location> locations = repository.findAll();
+        Iterable<Location> locations = locationRepository.findAll();
         locations.forEach(System.out::println);
     }
 
     @Test
     void findOneByUniversityId() {
-        Location location = repository.findByUniversity_Id(3L);
+        Location location = locationRepository.findByUniversity_Id(3L);
         System.out.println(location);
     }
 
     @Test
     void findById() {
-        Optional<Location> optional = repository.findById(new Long(3));
+        Optional<Location> optional = locationRepository.findById(new Long(4));
         Location location = optional.get();
         System.out.println(location);
     }
 
     @Test
     void findByLongitudeAndAndLatitude() {
-        Location location = repository.findByLongitudeAndAndLatitude(120, 200);
+        Location location = locationRepository.findByLongitudeAndAndLatitude(120, 200);
         System.out.println(location);
+    }
+
+    @Test
+    void existsLocationByLongitudeAndLatitude() {
+        // case1.
+        boolean b1 = locationRepository.existsLocationByLongitudeAndLatitude(1, 1);
+        assert b1;
+
+        // cas2.
+        boolean b2 = locationRepository.existsLocationByLongitudeAndLatitude(1, 10);
+        assert !b2;
     }
 }

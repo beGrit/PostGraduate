@@ -6,7 +6,11 @@ import org.yan.persistence.entity.university.University;
 import java.util.List;
 
 public interface UniversityService {
+    University queryById(Long uid) throws Exception;
+
     List<University> queryByPage(Integer pageIndex, Integer pageSize);
 
-    void updateLocation(Location location);
+    void updateUniversityLocation(Long uid, Location location) throws Exception;
+
+    boolean idAnyUniversityRelyOnSpecLocation(Long locationId);
 }

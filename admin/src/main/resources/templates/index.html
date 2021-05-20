@@ -12,7 +12,7 @@
 <body>
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="/">X-admin v2.0</a></div>
+    <div class="logo"><a href="/">后台数据管理子系统 v2.1</a></div>
     <div class="left_open">
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
@@ -45,10 +45,11 @@
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav">
+            <!--院校-->
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>院校管理</cite>
+                    <cite>模块管理-院校</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
@@ -57,58 +58,66 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>院校列表</cite>
                         </a>
-                    </li >
+                    </li>
+                    <li>
+                        <a _href="/admin/university/page">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>城市列表</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="/admin/university/page">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>位置列表</cite>
+                        </a>
+                    </li>
                 </ul>
             </li>
+            <!--专业-->
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
-                    <cite>订单管理</cite>
+                    <cite>模块管理-专业</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
                         <a _href="order-list.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite>
+                            <cite>专业列表</cite>
+                        </a>
+                        <a _href="order-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>专业-成绩列表</cite>
                         </a>
                     </li >
                 </ul>
             </li>
+            <!--分数线-->
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
-                    <cite>分类管理</cite>
+                    <cite>模块管理-分数线</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="cate.html">
+                        <a _href="order-list.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>多级分类</cite>
+                            <cite>国家线列表</cite>
+                        </a>
+                        <a _href="order-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>院校自划线列表</cite>
                         </a>
                     </li >
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>城市联动</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="city.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>三级地区联动</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+            <!--用户权限-->
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
-                    <cite>管理员管理</cite>
+                    <cite>模块管理-用户</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
@@ -136,6 +145,21 @@
                             <cite>权限管理</cite>
                         </a>
                     </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6ce;</i>
+                    <cite>首页内容管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="admin-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>首页信息列表</cite>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -210,6 +234,21 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>城市联动</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="city.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>三级地区联动</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
@@ -245,6 +284,7 @@
         }
         document.querySelector("#side-nav")
 
+        $.ajax()
     }
 </script>
 </body>

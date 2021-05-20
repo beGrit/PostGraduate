@@ -7,6 +7,6 @@ create table UMS_LOCATION
 )
     engine = MyISAM;
 
-INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (1, 1, 1);
 INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (2, 2, 3);
 INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (3, 3, 3);
+INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (8, 11, 2);
