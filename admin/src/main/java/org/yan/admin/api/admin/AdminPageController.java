@@ -1,4 +1,4 @@
-package org.yan.admin.controller;
+package org.yan.admin.api.admin;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,7 +6,7 @@ import org.yan.admin.domain.AdminIndexPageMeta;
 import org.yan.common.api.CommonResult;
 
 @RestController
-@RequestMapping("/api/admin/page/meta")
+@RequestMapping("/api/v2.1/admin/page/meta")
 public class AdminPageController {
     @RequestMapping
     public CommonResult<AdminIndexPageMeta> meta() {

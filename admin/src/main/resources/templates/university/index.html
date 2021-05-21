@@ -47,7 +47,7 @@
         <tr>
             <th>
                 <div>
-                    <input type="checkbox" @click="selectAll(isAllChecked)" :value="isAllChecked">
+                    <input type="checkbox" :input="checkAll(isAllChecked)" :value="isAllChecked">
                 </div>
             </th>
             <th v-for="th in ths">{{ th }}</th>
@@ -55,10 +55,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in universities" v-if="universities != null && universities.length != 0">
+        <tr v-for="(item,index) in universities" v-if="universities != null && universities.length != 0">
             <td>
                 <div>
-                    <input type="checkbox" name="idList" :value="item.id" checked @click="addId">
+                    <input type="checkbox" name="idList" @click="addId(index)">
                 </div>
             </td>
             <td>{{ item.id }}</td>
@@ -100,16 +100,18 @@
     <!--分页条-->
     <div class="page">
         <div>
-            <a class="prev"
-               href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${pageBar.prePageIndex}">&lt;&lt;</a>
-
-            <span class="current">${index}</span>
-
-            <a class="num"
-               href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${index}">${index}</a>
-
-            <a class="next"
-               href="${pageContext.request.contextPath}/admin/book?m=bookList&pageIndex=${pageBar.nextPageIndex}">&gt;&gt;</a>
+            <!--上一页-->
+            <a class="prev" href="#"
+               @click="fetchUniversityPage(pageBar.prePageIndex, 5)" :style="">&lt;&lt;</a>
+            <!--显示的分页索引-->
+            <a v-for="item in pageBar.declaredIndexList"
+               href="#"
+               @click="fetchUniversityPage(item, 5)">
+                {{ item }}
+            </a>
+            <!--下一页-->
+            <a class="next" href="#"
+               @click="fetchUniversityPage(pageBar.nextPageIndex, 5)" :disabled="pageBar.curPageIndex == 1">&gt;&gt;</a>
         </div>
     </div>
 </div>
@@ -120,20 +122,9 @@
             return {
                 count: 100,
                 cols: ['uid', '院校名', '是否是研究生院', '是否自划线院校', '排名', '官方网址', '该院校所在城市'],
-                universities: [
-                    // {
-                    //     uid: 1,
-                    //     name: "清华大学",
-                    //     isYJSY: "是",
-                    //     isZHX: "是",
-                    // },
-                    // {
-                    //     uid: 2,
-                    //     name: "北京大学",
-                    //     isYJSY: "是",
-                    //     isZHX: "是",
-                    // },
-                ],
+                pageBar: {},
+                universities: [],
+                index: 0,
                 curItem: {},
                 flag: false,
                 detailModalClass: {
@@ -141,18 +132,25 @@
                     "modal-show": false,
                 },
                 isAllChecked: false,
+                idList: [],
             }
         },
         computed: {
             ths: function () {
                 return this.cols.slice(0, 4)
+            },
+            idList: function () {
+                for (let i = 0; i < this.universities.length; i++) {
+                    this.idList[i] = false;
+                }
             }
         },
+        watch: {},
         methods: {
             // to backend methods
-            fetchUniversityPage() {
+            fetchUniversityPage(pageIndex, pageSize) {
                 $.ajax({
-                    url: '/api/admin/university/page',
+                    url: '/api/v2.1/university/page?' + "pageIndex=" + pageIndex + "&" + "pageSize=" + pageSize,
                     type: 'GET',
                     dataType: 'json',
                     timeout: 1000,
@@ -162,7 +160,8 @@
                     success: (tt) => {
                         var json = eval(tt); //数组
                         var tt = "";
-                        this.universities = json.universities;
+                        this.universities = json.data.pageContentInfo.data;
+                        this.pageBar = json.data.pageBar;
                     }
                 })
 
@@ -186,18 +185,15 @@
                 this.detailModalClass["modal-show"] = false;
                 this.detailModalClass["modal-hide"] = true;
             },
-            selectAll: function (isAllChecked) {
+            checkAll(isAllChecked) {
                 console.log(isAllChecked);
             },
-            checkAll() {
-
-            },
-            addId() {
-
+            addId(id) {
+                this.idList.push()
             },
         },
         created: function () {
-            this.fetchUniversityPage();
+            this.fetchUniversityPage(1, 5);
         },
         mounted: function () {
 

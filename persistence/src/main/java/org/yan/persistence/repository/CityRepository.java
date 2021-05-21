@@ -14,5 +14,8 @@ public interface CityRepository extends CrudRepository<City, Long> {
     Optional<City> findById(Long id);
 
     @Override
+    boolean existsById(Long aLong);
+
+    @Override
     City save(City s);
 }

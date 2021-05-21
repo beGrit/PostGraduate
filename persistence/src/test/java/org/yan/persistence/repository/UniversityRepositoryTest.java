@@ -1,5 +1,7 @@
 package org.yan.persistence.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestReporter;
 import org.junit.runner.RunWith;
@@ -32,7 +34,6 @@ class UniversityRepositoryTest {
     @Test
     void testQueryAll() {
         List<University> universities = (List<University>) universityRepository.findAll();
-//        Long city = universities.get(0).getCity();
         String city = universities.get(0).getCity();
         System.out.println(city);
     }
@@ -87,5 +88,32 @@ class UniversityRepositoryTest {
         // case 2
         boolean b2 = universityRepository.existsUniversityByLocation_Id(1L);
         assert !b2;
+    }
+
+    @Test
+    void countDistinctByIdNotNull() {
+        Long count = universityRepository.countDistinctByIdNotNull();
+        System.out.println(count);
+    }
+
+    @Test
+    void testFindById() {
+        Optional<University> byId = universityRepository.findById(9L);
+        assert !byId.isPresent();
+    }
+
+    @Test
+    void findAll() {
+        PageRequest pageRequest = PageRequest.of(0, 2);
+        Page<University> page = universityRepository.findAll(pageRequest);
+        List<University> content = page.getContent();
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(page);
+            System.out.println(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 }

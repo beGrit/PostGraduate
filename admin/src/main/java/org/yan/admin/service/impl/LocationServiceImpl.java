@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yan.admin.exception.basic.DeleteException;
 import org.yan.admin.service.LocationService;
-import org.yan.admin.service.UniversityService;
+import org.yan.admin.service.UniversityManager;
 import org.yan.persistence.entity.university.Location;
-import org.yan.persistence.entity.university.University;
 import org.yan.persistence.repository.LocationRepository;
 
 import java.util.Optional;
@@ -17,7 +16,7 @@ public class LocationServiceImpl implements LocationService {
     LocationRepository locationRepository;
 
     @Autowired
-    UniversityService universityService;
+    UniversityManager universityManager;
 
     @Override
     public boolean isExist(Location location) {
@@ -39,7 +38,7 @@ public class LocationServiceImpl implements LocationService {
     public boolean delete(Long locationId) throws DeleteException {
         boolean isExist = isExist(locationId);
         // 判断是否有院校依赖该位置
-        boolean b2 = universityService.idAnyUniversityRelyOnSpecLocation(locationId);
+        boolean b2 = universityManager.isLocationUsed(locationId);
         if (isExist && !b2) { // 位置存在且位置信息没有依赖关系
             Optional<Location> locationOptional = locationRepository.findById(locationId);
             Location location = locationOptional.get();
