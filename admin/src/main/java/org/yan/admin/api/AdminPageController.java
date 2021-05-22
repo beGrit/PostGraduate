@@ -1,6 +1,7 @@
-package org.yan.admin.api.admin;
+package org.yan.admin.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.yan.admin.domain.AdminIndexPageMeta;
 import org.yan.common.api.CommonResult;
@@ -8,7 +9,7 @@ import org.yan.common.api.CommonResult;
 @RestController
 @RequestMapping("/api/v2.1/admin/page/meta")
 public class AdminPageController {
-    @RequestMapping
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public CommonResult<AdminIndexPageMeta> meta() {
         AdminIndexPageMeta adminIndexPageMeta = new AdminIndexPageMeta("后台管理子系统", "v2.1");
         return CommonResult.success(adminIndexPageMeta);

@@ -26,6 +26,7 @@
            href="javascript:location.replace(location.href);" title="刷新">
             <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
+    <!--检索区域-->
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
             <input class="layui-input" placeholder="开始日" name="start" id="start">
@@ -34,13 +35,15 @@
             <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
+    <!--按钮区 + 元数据meta区-->
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn layui-btn-danger" @click="deleteByIdList(idList)"><i class="layui-icon"></i>批量删除
+        </button>
         <button class="layui-btn"
-                onclick="x_admin_show('Add_Book','${pageContext.request.contextPath}/admin/index?m=addBookView')"><i
+                onclick="x_admin_show('Add_Book','/admin/university/addView')"><i
                 class="layui-icon"></i>添加
         </button>
-        <span class="x-right" style="line-height:40px">共有数据：{{ count }} 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：{{ this.pageBar.totalRecords }} 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -58,7 +61,7 @@
         <tr v-for="(item,index) in universities" v-if="universities != null && universities.length != 0">
             <td>
                 <div>
-                    <input type="checkbox" name="idList" @click="addId(index)">
+                    <input type="checkbox" name="idList" @click="updateIdList(item.id,$event)">
                 </div>
             </td>
             <td>{{ item.id }}</td>
@@ -66,7 +69,7 @@
             <td>{{ item.isYJSY }}</td>
             <td>{{ item.isZHX }}</td>
             <td>
-                <button @click="showDetail(item)">详情按钮</button>
+                <button @click="showDetail(item)">查看详情</button>
             </td>
         </tr>
         <div v-else>
@@ -104,11 +107,16 @@
             <a class="prev" href="#"
                @click="fetchUniversityPage(pageBar.prePageIndex, 5)" :style="">&lt;&lt;</a>
             <!--显示的分页索引-->
-            <a v-for="item in pageBar.declaredIndexList"
-               href="#"
-               @click="fetchUniversityPage(item, 5)">
-                {{ item }}
-            </a>
+            <div style="display: inline" v-for="item in pageBar.declaredIndexList">
+                <a v-if="item != pageBar.curPageIndex"
+                   href="#"
+                   @click="fetchUniversityPage(item, 5)">
+                    {{ item }}
+                </a>
+                <span v-if="item == pageBar.curPageIndex" class="current">
+                    {{ item }}
+                </span>
+            </div>
             <!--下一页-->
             <a class="next" href="#"
                @click="fetchUniversityPage(pageBar.nextPageIndex, 5)" :disabled="pageBar.curPageIndex == 1">&gt;&gt;</a>
@@ -116,12 +124,22 @@
     </div>
 </div>
 <script>
-    new Vue({
+    function LoadFunction1() {
+        // $("#list3").html('加载中...');
+    }
+
+    function erryFunction1() {
+        alert("error");
+    }
+
+    const app = new Vue({
         el: "#app",
         data: function () {
             return {
                 count: 100,
                 cols: ['uid', '院校名', '是否是研究生院', '是否自划线院校', '排名', '官方网址', '该院校所在城市'],
+                curPageIndex: 1,
+                pageSize: 3,
                 pageBar: {},
                 universities: [],
                 index: 0,
@@ -132,7 +150,6 @@
                     "modal-show": false,
                 },
                 isAllChecked: false,
-                idList: [],
             }
         },
         computed: {
@@ -140,9 +157,10 @@
                 return this.cols.slice(0, 4)
             },
             idList: function () {
-                for (let i = 0; i < this.universities.length; i++) {
-                    this.idList[i] = false;
-                }
+                return new Set([]);
+            },
+            count: function () {
+                return this.pageBar.totalRecords;
             }
         },
         watch: {},
@@ -157,11 +175,12 @@
                     cache: false,
                     beforeSend: LoadFunction1, //加载执行方法
                     error: erryFunction1,  //错误执行方法
-                    success: (tt) => {
-                        var json = eval(tt); //数组
-                        var tt = "";
+                    success: (text) => {
+                        let json = eval(text); //数组
+                        text = "";
                         this.universities = json.data.pageContentInfo.data;
                         this.pageBar = json.data.pageBar;
+                        this.curPageIndex = this.pageBar.curPageIndex;
                     }
                 })
 
@@ -172,6 +191,34 @@
                 function erryFunction1() {
                     alert("error");
                 }
+            },
+            deleteByIdList(idList) {
+                console.log(idList);
+                if (idList.size === 0) {
+                    alert("未选中任何数据");
+                    return;
+                }
+                $.ajax({
+                    url: '/api/v2.1/university/list',
+                    type: 'DELETE',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    timeout: 1000,
+                    cache: false,
+                    data: JSON.stringify([...idList]),
+                    beforeSend: LoadFunction1, //加载执行方法
+                    error: erryFunction1,  //错误执行方法
+                    success: (text) => {
+                        let json = eval(text); //数组
+                        text = "";
+
+                        // 删除成功后的操作
+                        alert("删除成功");
+                        console.log(json);
+                        this.fetchUniversityPage(this.curPageIndex, this.pageSize);
+                    }
+                })
+
             },
 
             // basic javascript methods
@@ -188,8 +235,20 @@
             checkAll(isAllChecked) {
                 console.log(isAllChecked);
             },
-            addId(id) {
-                this.idList.push()
+            updateIdList(id, event) {
+                // event.preventDefault();
+                const checkbox = event.target;
+                if (checkbox.checked) {
+                    // 添加元素
+                    this.idList.add(id)
+                    console.log("添加元素" + id);
+                    console.log(this.idList);
+                } else {
+                    // 删除元素
+                    this.idList.delete(id);
+                    console.log("删除元素" + id);
+                    console.log(this.idList);
+                }
             },
         },
         created: function () {

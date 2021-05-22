@@ -16,6 +16,7 @@ public interface UniversityRepository extends PagingAndSortingRepository<Univers
 
     /**
      * 查询第n页的数据
+     *
      * @param pageable
      * @return
      */
@@ -23,4 +24,11 @@ public interface UniversityRepository extends PagingAndSortingRepository<Univers
             countQuery = "SELECT count(*) FROM UMS_UNIVERSITY",
             nativeQuery = true)
     Page<University> findAll(Pageable pageable);
+
+
+    @Override
+    void delete(University university);
+
+    @Override
+    void deleteById(Long aLong);
 }

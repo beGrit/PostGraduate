@@ -19,6 +19,7 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
+        registry.addResourceHandler("**/*.js").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX);
     }
 
     @Override

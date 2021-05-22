@@ -19,6 +19,8 @@ public interface UniversityManager {
      */
     List<University> queryByPage(Integer pageIndex, Integer pageSize) throws QueryException;
 
+    List<University> queryAll() throws QueryException;
+
     /**
      * 更新院校的位置信息
      * @param uid
@@ -39,4 +41,8 @@ public interface UniversityManager {
      * @return
      */
     Long getTotal();
+
+    void delete(Long uid) throws CrudException;
+
+    void batchDelete(List<Long> idList) throws CrudException;
 }

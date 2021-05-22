@@ -10,6 +10,7 @@
 </head>
 <body>
 <div id="app">
+    <ubutton></ubutton>
     <input v-model="queryUid">
     <button @click="checkoutUniversity(queryUid)">切换</button>
     <header>
@@ -49,7 +50,6 @@
             </div>
         </div>
     </header>
-
     <section>
         <div id="map">
             <!--            <h2>地理位置</h2>
@@ -63,7 +63,8 @@
         </div>
     </section>
 </div>
-<script>
+<script type="module">
+    import uButton from '/static/js/button.js';
     const app = new Vue({
         el: "#app",
         data() {
@@ -85,14 +86,15 @@
                     }, //加载执行方法
                     error: () => {
                     },  //错误执行方法
-                    success: (tt) => {
-                        var json = eval(tt); //数组
-                        var tt = "";
-                        this.university = json.data.university
+                    success: (text) => {
+                        let json = eval(text); //数组
+                        text = "";
+                        this.university = json.data
                         this.initMap(this.university.location.longitude, this.university.location.latitude);
                     }
                 });
             },
+
             initMap: function (longitude, latitude) {
                 console.log("定位中:" + longitude + ',' + latitude);
                 const map = new AMap.Map('map', {
@@ -108,7 +110,11 @@
         mounted: function () {
 
         },
+        components: {
+            ubutton: uButton,
+        }
     });
+    export default app;
 </script>
 </body>
 </html>

@@ -1,10 +1,8 @@
 package org.yan.persistence.entity.university;
 
-import org.yan.persistence.entity.university.University;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "UMS_LOCATION")
@@ -16,14 +14,16 @@ public class Location {
     /**
      * 经度
      */
+    @ApiModelProperty("经度")
     private Double longitude;
 
     /**
      * 纬度
      */
+    @ApiModelProperty("纬度")
     private Double latitude;
 
-    @OneToOne(mappedBy = "location")
+    @OneToOne(mappedBy = "location", fetch = FetchType.LAZY)
     private University university;
 
     public Long getId() {

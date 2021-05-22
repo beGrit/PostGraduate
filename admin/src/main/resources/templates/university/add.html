@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add University</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/css/university.css">
+
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="bno" class="layui-form-label">
+                <span class="x-red">*</span>序列号
+            </label>
+
+            <div class="layui-input-inline">
+                <input type="text" id="bno" name="bno" required="" lay-verify="required|bno"
+                       autocomplete="off" class="layui-input" placeholder="请输入 bXX">
+            </div>
+
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>书籍的唯一标识ID
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="bname" class="layui-form-label">
+                <span class="x-red">*</span>书名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="bname" name="bname" required="" lay-verify="required|bname"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>书籍名称
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="author" class="layui-form-label">
+                <span class="x-red">*</span>作者
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="author" name="author" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>书籍的作者
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="price" class="layui-form-label">
+                <span class="x-red">*</span>价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="price" name="price" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>书籍的作者
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="publish" class="layui-form-label">
+                <span class="x-red">*</span>出版社
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="publish" name="publish" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>书籍的作者
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="bookNumber" class="layui-form-label">
+                <span class="x-red">*</span>库存量
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="bookNumber" name="bookNumber" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>书籍的作者
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <%--lay-submit 表示该元素触发form提交事件--%>
+            <button class="layui-btn" lay-filter="add" lay-submit="">
+                增加
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

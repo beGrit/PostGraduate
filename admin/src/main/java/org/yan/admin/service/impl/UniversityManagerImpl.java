@@ -1,7 +1,11 @@
 package org.yan.admin.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.yan.admin.exception.basic.CrudException;
 import org.yan.admin.exception.basic.QueryException;
 import org.yan.admin.service.LocationService;
@@ -36,22 +40,52 @@ public class UniversityManagerImpl implements UniversityManager {
         return universityRepository.countDistinctByIdNotNull();
     }
 
+    @Override
+    @Transactional
+    public void delete(Long uid) throws CrudException {
+        try {
+            University university = queryById(uid);
+            universityRepository.delete(university);
+        } catch (QueryException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    @Transactional
+    public void batchDelete(List<Long> idList) throws CrudException {
+        for (Long id : idList) {
+            delete(id);
+        }
+    }
+
     public University queryById(Long uid) throws QueryException {
         Optional<University> universityOptional = universityRepository.findById(uid);
         if (universityOptional.isPresent()) {
             University university = universityOptional.get();
             return university;
         } else {
-            throw new QueryException("查询不到指定的院校");
+            throw new QueryException("查询不到指定的院校: " + uid);
         }
     }
 
     @Override
     public List<University> queryByPage(Integer pageIndex, Integer pageSize) throws QueryException {
-        List<University> rtn = (List<University>) universityRepository.findAll();
-        if (rtn == null) {
+        Page<University> rtn = universityRepository.findAll(PageRequest.of(pageIndex - 1, pageSize));
+        if (rtn.getNumberOfElements() == 0) {
             throw new QueryException("数据集为空");
-        } else  {
+        } else {
+            return rtn.getContent();
+        }
+    }
+
+    @Override
+    public List<University> queryAll() throws QueryException {
+        List<University> rtn = (List<University>) universityRepository.findAll();
+        if (rtn.size() == 0) {
+            // 数据为空
+            throw new QueryException("无数据");
+        } else {
             return rtn;
         }
     }

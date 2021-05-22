@@ -48,19 +48,17 @@ class UniversityRepositoryTest {
     }
 
     @Test
-    @Transactional
+//    @Transactional
     void saveTest() {
-        University hzdx = new University(11L, "杭州大学", 1, 1, 20, 0, 0, "www.hzdx.com");
-
-        Optional<Location> byId = locationRepository.findById(3L);
-        Location location = byId.get();
+        University hzsfdx = new University(11L, "杭州师范大学", 1, 1, 20, 0, 0, "www.hzsfdx.com");
+        Location location = locationRepository.save(new Location(9L, 222.0, 210.0));
 
         City hz = cityRepository.findByNameIs("杭州");
 
-        hzdx.setLocation(location);
-        hzdx.setCity(hz);
+        hzsfdx.setLocation(location);
+        hzsfdx.setCity(hz);
 
-        universityRepository.save(hzdx);
+        universityRepository.save(hzsfdx);
     }
 
     @Test
@@ -115,5 +113,31 @@ class UniversityRepositoryTest {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+//    @Transactional
+    void testDelete() {
+        Optional<University> optionalUniversity = universityRepository.findById(11L);
+        if (optionalUniversity.isPresent()) {
+            University university = optionalUniversity.get();
+            universityRepository.delete(university);
+        }
+    }
+
+    @Test
+    @Transactional
+    void delete() {
+        Optional<University> optional = universityRepository.findById(1L);
+        University university = optional.get();
+        universityRepository.delete(university);
+    }
+
+    @Test
+    @Transactional
+    void deleteById() {
+        // case1.
+        universityRepository.deleteById(4L);
+        System.out.println();
     }
 }
