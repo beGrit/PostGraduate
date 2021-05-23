@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yan.mybatis.mapper.UniversityMapper">
+    <select id="findNameById" parameterType="java.lang.Long" resultType="java.lang.String">
+        select u.name
+        from UMS_UNIVERSITY u
+        where u.id = #{id}
+    </select>
+</mapper>

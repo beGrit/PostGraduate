@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.yan.admin.dto.AddUniversityDTO;
 import org.yan.admin.exception.basic.CrudException;
 import org.yan.admin.exception.basic.QueryException;
 import org.yan.admin.service.UniversityManager;
@@ -57,5 +58,10 @@ public class UniversityController {
         } catch (CrudException e) {
             return CommonResult.failed(e.getMessage());
         }
+    }
+
+    @RequestMapping(value = "/one", method = RequestMethod.POST, consumes = "application/json")
+    public CommonResult addOne(@RequestBody AddUniversityDTO dto) {
+        return null;
     }
 }

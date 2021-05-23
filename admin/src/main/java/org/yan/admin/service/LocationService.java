@@ -1,6 +1,7 @@
 package org.yan.admin.service;
 
 import org.yan.admin.exception.basic.DeleteException;
+import org.yan.admin.exception.basic.UpdateException;
 import org.yan.persistence.entity.university.Location;
 
 public interface LocationService {
@@ -8,5 +9,5 @@ public interface LocationService {
 
     boolean delete(Long locationId) throws DeleteException;
 
-    void save(Location location);
+    Location save(Location location) throws UpdateException;
 }

@@ -14,91 +14,66 @@
 </head>
 <body>
 <div class="x-body">
-    <form class="layui-form">
-        <div class="layui-form-item">
-            <label for="bno" class="layui-form-label">
-                <span class="x-red">*</span>序列号
-            </label>
-
-            <div class="layui-input-inline">
-                <input type="text" id="bno" name="bno" required="" lay-verify="required|bno"
-                       autocomplete="off" class="layui-input" placeholder="请输入 bXX">
-            </div>
-
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>书籍的唯一标识ID
+    <form class="layui-form" action="">
+        <!--表单内容区域-->
+        <div class="layui-inline">
+            <label class="layui-form-label">院校ID</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="id" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="bname" class="layui-form-label">
-                <span class="x-red">*</span>书名
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="bname" name="bname" required="" lay-verify="required|bname"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>书籍名称
+            <label class="layui-form-label">院校名</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required  lay-verify="required" placeholder="请输入院校名称" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="author" class="layui-form-label">
-                <span class="x-red">*</span>作者
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="author" name="author" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>书籍的作者
+            <label class="layui-form-label">官方网址</label>
+            <div class="layui-input-block">
+                <input type="text" name="officialUrl" required  lay-verify="required" placeholder="请输入院校官方网址" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="price" class="layui-form-label">
-                <span class="x-red">*</span>价格
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="price" name="price" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+            <label class="layui-form-label">复选框</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="isYJSY" title="是否是研究生院" checked>
+                <input type="checkbox" name="isZHX" title="是否是自划线">
+                <input type="checkbox" name="isJBW" title="是否是985院校">
+                <input type="checkbox" name="isEYY" title="是否是211院校">
             </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>书籍的作者
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">位置信息</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="longitude" placeholder="经度°" autocomplete="off" class="layui-input">
+            </div>
+            -
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="latitude" placeholder="纬度°" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="publish" class="layui-form-label">
-                <span class="x-red">*</span>出版社
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="publish" name="publish" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>书籍的作者
+            <label class="layui-form-label">所属城市</label>
+            <div class="layui-input-block">
+                <!--发送网络请求,动态渲染-->
+                <select name="city" lay-verify="required">
+                    <option value="0">北京</option>
+                    <option value="1">上海</option>
+                    <option value="2">广州</option>
+                    <option value="3">深圳</option>
+                    <option value="4">杭州</option>
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="bookNumber" class="layui-form-label">
-                <span class="x-red">*</span>库存量
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="bookNumber" name="bookNumber" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo" @click="addOneUniversity">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>书籍的作者
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
-            </label>
-            <%--lay-submit 表示该元素触发form提交事件--%>
-            <button class="layui-btn" lay-filter="add" lay-submit="">
-                增加
-            </button>
         </div>
     </form>
 </div>
+
 </body>
 </html>

@@ -1,6 +1,8 @@
 package org.yan.persistence.entity.university;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
 
@@ -70,76 +72,77 @@ public class University {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getIsYJSY() {
         return isYJSY;
     }
 
-    public void setIsYJSY(int isYJSY) {
-        this.isYJSY = isYJSY;
-    }
-
     public int getIsZHX() {
         return isZHX;
-    }
-
-    public void setIsZHX(int isZHX) {
-        this.isZHX = isZHX;
     }
 
     public int getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
     public String getOfficialUrl() {
         return officialUrl;
-    }
-
-    public void setOfficialUrl(String officialUrl) {
-        this.officialUrl = officialUrl;
     }
 
     public String getCity() {
         return city.getName();
     }
 
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public int getIsJBW() {
         return isJBW;
-    }
-
-    public void setIsJBW(int isJBW) {
-        this.isJBW = isJBW;
     }
 
     public int getIsEYY() {
         return isEYY;
     }
 
-    public void setIsEYY(int isEYY) {
-        this.isEYY = isEYY;
-    }
 
     public Location getLocation() {
         return location;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIsYJSY(int isYJSY) {
+        this.isYJSY = isYJSY;
+    }
+
+    public void setIsZHX(int isZHX) {
+        this.isZHX = isZHX;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public void setOfficialUrl(String officialUrl) {
+        this.officialUrl = officialUrl;
+    }
+
+    public void setIsJBW(int isJBW) {
+        this.isJBW = isJBW;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public void setIsEYY(int isEYY) {
+        this.isEYY = isEYY;
     }
 
     public void setLocation(Location location) {

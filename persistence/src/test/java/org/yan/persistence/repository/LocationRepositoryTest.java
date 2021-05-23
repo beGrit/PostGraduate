@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.yan.persistence.entity.university.Location;
 
 import java.util.Optional;
@@ -21,6 +22,13 @@ class LocationRepositoryTest {
         location.setId(4L);
         location = locationRepository.save(location);
         System.out.println(location.getId());
+    }
+
+    @Test
+    @Transactional
+    void save_case2() {
+        Location location = new Location(130.0, 200.0);
+        locationRepository.save(location);
     }
 
     @Test
