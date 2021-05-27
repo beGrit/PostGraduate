@@ -1,4 +1,3 @@
-
 export class Component {
     registerPlugin(...plugins) {
         return;
@@ -6,6 +5,9 @@ export class Component {
 
     render(data) {
         // 接口
-        return;
+    }
+
+    defaultRender() {
+        // 默认渲染逻辑
     }
 }

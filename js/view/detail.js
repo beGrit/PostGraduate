@@ -3,9 +3,9 @@ import {fetchUniversityByIds} from "/js/ajax.js";
 import {initChart} from "/js/grades-compare.js";
 
 window.onload = function () {
-    function initialData() {
-        let promise = fetchUniversityByIds(1, 2);
-        promise.then(response => response.json())
+    function initialData(id1, id2) {
+        let fetchPromise = fetchUniversityByIds(id1, id2);
+        fetchPromise.then(response => response.json())
             .then(json => json["data"])
             .then(data => {
                 c1.render(data);
@@ -17,20 +17,100 @@ window.onload = function () {
             })
             .then(universities => {
                 c2.render(universities);
+            })
+            .catch(reason => {
+                c1.render(null);
             });
     }
 
-    class ComparedContent extends Component {
+    /*控制流抽象*/
+    class ContentController extends Component {
+        constructor(id) {
+            super();
+            this.container = document.querySelector("#" + id);
+            this.buttonList = this.container.querySelectorAll(".content-control__item--selected,.content-control__item");
+        }
+
+        bindEvents(container) {
+            this.buttonList.forEach(item => {
+                item.addEventListener("click", evt => {
+                    console.log(item)
+                    this.switchTo(item, container);
+                });
+            });
+        }
+
+        getNumOfButtonList() {
+            return this.buttonList.length;
+        }
+
+        getCurSelectedItemIdx() {
+            return Array.from(this.buttonList).indexOf(this.getCurSelectedItem());
+        }
+
+        getCurSelectedItem() {
+            for (let item of this.buttonList) {
+                if (item.className === "content-control__item--selected") {
+                    return item;
+                }
+            }
+        }
+
+        switchTo(item, container) {
+            let size = this.getNumOfButtonList();
+            let curSelectedItem = this.getCurSelectedItem();
+            if (item !== curSelectedItem) {
+                item.className = "content-control__item--selected";
+                curSelectedItem.className = "content-control__item";
+                container.switchPanelByIdx(this.getCurSelectedItemIdx());
+            }
+        }
+    }
+
+    /*Header*/
+    class CompareDetailHeader extends Component {
         constructor(id) {
             super();
             this.container = document.querySelector("#" + id);
         }
+
+        registerPlugin(...plugins) {
+
+        }
+
+        render(data) {
+            const nameWrapper = this.container.querySelector(".university-name-wrapper");
+            const child1 = nameWrapper.firstElementChild;
+            const child2 = child1.nextElementSibling;
+            child1.textContent = data[0];
+            child2.textContent = data[1];
+        }
     }
 
-    class UniversityCompareTable extends ComparedContent {
+    class PanelContainer extends Component {
+        constructor() {
+            super();
+            this.container = document.querySelector("#compare-detail-content");
+            this.panelList = this.container.querySelectorAll(".content-container-panel");
+        }
+
+        switchPanelByIdx(panelIndex) {
+            console.log(panelIndex)
+            let oldPosition = this.container.scrollLeft;
+            let targetPosition = 275 * panelIndex;
+            this.container.scrollLeft = targetPosition;
+        }
+    }
+
+    /*综合比较面板*/
+    class CompositeComparePanel extends Component {
         constructor(id, rowRegisterList = null) {
-            super(id);
+            super();
+            this.container = document.querySelector("#" + id);
             this.table = this.container.querySelector("table");
+            this.thead = this.table.querySelector("thead");
+            this.tbody = this.table.querySelector("tbody");
+
             this.rowMapper = new Map();
             if (rowRegisterList == null) {
                 this.defaultRegister();
@@ -81,26 +161,45 @@ window.onload = function () {
         }
 
         render(data) {
-            // 渲染table表头
-            const thead = this.table.querySelector("thead");
-            const theadTr = thead.querySelector("tr");
-            let dataSize = data.length;
+            // 清除已渲染过的数据
+            this.clearRendered();
+            if (data == null) {
+                this.renderEmpty();
+            } else {
+                // 渲染新数据
+                this.renderTable(data);
+            }
+        }
 
-            const template = document.querySelector("#university-table-header");
+        renderTable(data) {
+            // 渲染 thead 的数据
+            const thead = this.table.querySelector("thead");
+
+            // 获取到template
+            const theadTemplate = document.querySelector("#university-table-header");
+
+            let dataSize = data.length;
             for (let k = 0; k < dataSize; k++) {
-                let clone = template.content.cloneNode(true);
-                let th = clone.querySelector("th");
-                th.textContent = data[k]['name'];
-                theadTr.appendChild(th);
+                // 创建新的结点
+                let newTd = document.createElement('td');
+                newTd.textContent = data[k]['name'];
+                newTd.className = "item-th";
+
+                // 从模板中clone出结点
+                let clone = theadTemplate.content.cloneNode(true);
+                let tr = clone.querySelector("tr");
+
+                // 挂载
+                tr.appendChild(newTd);
+                thead.appendChild(clone);
             }
 
-            // 渲染 template 的数据
+            // 渲染 tbody 的数据
             const keys = Object.keys(data[0]);
+            const tbodyTemplate = document.querySelector("#university-table-data");
             for (let i = 0; i < keys.length; i++) {
-
-                const template = document.querySelector("#university-table-data");
                 if (this.isRegistered(keys[i])) {
-                    let cloneContent = template.content.cloneNode(true);
+                    let cloneContent = tbodyTemplate.content.cloneNode(true);
                     let tr = cloneContent.querySelector("tr");
 
                     // 渲染th(第一格)
@@ -121,44 +220,31 @@ window.onload = function () {
             }
         }
 
-        clearData() {
+        renderEmpty(message = "未选中任何数据") {
+            const emptyTemplate = document.querySelector("#university-table-header--empty");
+            let clone = emptyTemplate.content.cloneNode(true);
+            this.thead.appendChild(clone);
+        }
+
+        clearRendered() {
 
         }
     }
 
-    class CompareDetailHeader extends Component {
-        constructor(id) {
-            super();
-            this.container = document.querySelector("#" + id);
-        }
-
-        registerPlugin(...plugins) {
-
-        }
-
-        render(data = {universities: ["未选中", "未选中"]}) {
-            const nameWrapper = this.container.querySelector(".university-name-wrapper");
-            const child1 = nameWrapper.firstElementChild;
-            const child2 = child1.nextElementSibling;
-            child1.textContent = data[0];
-            child2.textContent = data[1];
-        }
+    /*分数线比较面板*/
+    class GradesComparePanel extends Component {
+        
     }
 
-    const c1 = new UniversityCompareTable("comprehensive-compare");
+    const c1 = new CompositeComparePanel("comprehensive-compare");
     const c2 = new CompareDetailHeader("detail-header");
-    initialData();
+    const contentController = new ContentController("content-controller");
+    const contentContainer = new PanelContainer();
+
+    contentController.bindEvents(contentContainer);
+
+    initialData(1, 2);
     initChart("main");
-
-    const tempButton = document.querySelector("#temp-button");
-    tempButton.addEventListener("click", evt => {
-        const oldComponent = document.querySelector(".container--show");
-        const newComponent = document.querySelector(".container--hidden");
-        oldComponent.className = "container--hidden";
-        newComponent.className = "container--show"
-    })
-
 }
 
 
-// 控制流

@@ -40,83 +40,89 @@
         </div>
     </div>
 
+    <!--内容区域-->
     <div class="compare-detail__content-wrapper">
         <!--按钮区(一系列items-实现交互逻辑-控制流)-->
-        <div class="content-control segment-outer">
+        <div class="content-control segment-outer" id="content-controller">
             <div class="content-control__item--selected">
                 <div class="content-control__item-button">
-                    <img src="img/university.png">
+                    <img src="img/icon1.png">
                 </div>
                 <div class="content-control__item-title">院校实力</div>
             </div>
             <div class="content-control__item">
                 <div class="content-control__item-button">
-                    <img src="img/score.png">
+                    <img src="img/icon2.png">
                 </div>
                 <div class="content-control__item-title">分数线</div>
             </div>
             <div class="content-control__item">
                 <div class="content-control__item-button">
-                    <img src="img/university.png">
+                    <img src="img/icon3.png">
                 </div>
                 <div class="content-control__item-title">竞争力</div>
             </div>
             <div class="content-control__item">
                 <div class="content-control__item-button">
-                    <img src="img/university.png">
+                    <img src="img/icon4.png">
                 </div>
                 <div class="content-control__item-title">考试科目</div>
             </div>
             <div class="content-control__item">
                 <div class="content-control__item-button">
-                    <img src="img/university.png">
+                    <img src="img/icon5.png">
                 </div>
                 <div class="content-control__item-title">研究方向</div>
             </div>
         </div>
-        <button id="temp-button">切换</button>
         <!--内容区-->
-        <div class="content content-wrapper" id="compare-detail-content">
-            <!--综合比较-->
-            <section class="container--show" id="comprehensive-compare">
-                <table>
-                    <caption>院校实力比较</caption>
-                    <thead>
-                    <tr>
-                        <th></th>
+        <div class="content-container-wrapper" id="compare-detail-content">
+            <div class="content-container-outer">
+                <!--综合比较-->
+                <div class="content-container-panel" id="comprehensive-compare">
+                    <table>
+                        <caption>院校实力比较</caption>
+
                         <!--表头-->
-                        <template id="university-table-header">
-                            <th scope="col" class="item-th"></th>
+                        <thead>
+                        <template id="university-table-header--empty">
+                            <tr>
+                                <th colspan="1" scope="col" class="item-th">未选中任何数据</th>
+                            </tr>
                         </template>
-                    </tr>
-                    </thead>
+                        <template id="university-table-header">
+                            <tr>
+                                <th colspan="1" scope="col" class="item-th"></th>
+                            </tr>
+                        </template>
+                        </thead>
 
-                    <tbody>
-                    <!--表内容-->
-                    <template id="university-table-data">
-                        <tr>
-                            <th scope="row" class="item-data"></th>
-                        </tr>
-                    </template>
-                    </tbody>
-                </table>
-            </section>
-
-            <!--分数线比较-->
-            <section class="container--show" id="grades-compare">
-                <div>
-                    <div class="chart-title">title</div>
-                    <div class="grade-chart" id="main">
+                        <tbody>
+                        <!--表内容-->
+                        <template id="university-table-data">
+                            <tr>
+                                <th scope="row" class="item-data"></th>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分数线比较-->
+                <div class="content-container-panel" id="grades-compare">
+                    <div>
+                        <div class="chart-title">title</div>
+                        <div class="grade-chart" id="main">
+                        </div>
                     </div>
                 </div>
-            </section>
+                <div class="content-container-panel"></div>
+                <div class="content-container-panel"></div>
+                <div class="content-container-panel"></div>
+                <div class="content-container-panel"></div>
+            </div>
         </div>
     </div>
 </div>
-
-<!--Template模板区-->
-
-
 <script src="/js/view/detail.js" type="module"></script>
 </body>
 </html>
