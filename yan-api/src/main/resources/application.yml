@@ -1,0 +1,6 @@
+server:
+  port: 1314
+
+spring:
+  application:
+    name: yan-restFul-api

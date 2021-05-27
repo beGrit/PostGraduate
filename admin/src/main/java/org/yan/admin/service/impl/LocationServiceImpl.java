@@ -3,15 +3,20 @@ package org.yan.admin.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yan.admin.exception.basic.DeleteException;
+import org.yan.admin.exception.basic.QueryException;
 import org.yan.admin.exception.basic.UpdateException;
 import org.yan.admin.service.LocationService;
 import org.yan.admin.service.UniversityManager;
+import org.yan.common.domain.page.PageParam;
 import org.yan.persistence.entity.university.Location;
 import org.yan.persistence.repository.LocationRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -59,6 +64,18 @@ public class LocationServiceImpl implements LocationService {
             } else {
                 throw new DeleteException("删除失败,有某个院校依赖该位置: " + locationId);
             }
+        }
+    }
+
+    @Override
+    public List<Location> queryByPage(PageParam pageParam) throws QueryException {
+        int pageIndex = pageParam.getPageIndex();
+        int pageSize = pageParam.getPageSize();
+        Page<Location> rtn = locationRepository.findAll(PageRequest.of(pageIndex - 1, pageSize));
+        if (rtn.getNumberOfElements() == 0) {
+            throw new QueryException("数据集为空");
+        } else {
+            return rtn.getContent();
         }
     }
 

@@ -1,7 +1,7 @@
 package org.yan.common.facotry;
 
 import org.yan.common.builders.PageBuilder;
-import org.yan.common.domain.Page;
+import org.yan.common.domain.page.Page;
 
 import java.util.List;
 

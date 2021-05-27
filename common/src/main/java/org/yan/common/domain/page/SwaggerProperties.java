@@ -1,4 +1,4 @@
-package org.yan.common.domain;
+package org.yan.common.domain.page;
 
 import lombok.Builder;
 import lombok.Data;

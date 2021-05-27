@@ -4,17 +4,18 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.expression.Lists;
 import org.yan.admin.dto.AddUniversityDTO;
 import org.yan.admin.exception.basic.CrudException;
 import org.yan.admin.exception.basic.QueryException;
 import org.yan.admin.service.UniversityManager;
 import org.yan.common.api.CommonResult;
-import org.yan.common.domain.Page;
+import org.yan.common.domain.page.Page;
 import org.yan.common.facotry.PageFactory;
 import org.yan.persistence.entity.university.University;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Api(tags = "UniversityController")
 @RestController
@@ -63,5 +64,13 @@ public class UniversityController {
     @RequestMapping(value = "/one", method = RequestMethod.POST, consumes = "application/json")
     public CommonResult addOne(@RequestBody AddUniversityDTO dto) {
         return null;
+    }
+
+    @RequestMapping(value = "/list/criteria", method = RequestMethod.GET)
+    public CommonResult getByTwoId(@RequestParam(value = "id1") Long id1, @RequestParam(value = "id2") Long id2) throws QueryException {
+        University university1 = universityManager.queryById(id1);
+        University university2 = universityManager.queryById(id2);
+        List<University> universities = Arrays.asList(university1, university2);
+        return CommonResult.success(universities);
     }
 }

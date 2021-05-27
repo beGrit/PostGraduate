@@ -1,6 +1,6 @@
 package org.yan.common.api;
 
-import org.yan.common.domain.Page;
+import org.yan.common.domain.page.Page;
 
 public class PageResult<T> {
     private long code;

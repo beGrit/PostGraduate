@@ -31,8 +31,11 @@ public class UniversityManagerTest {
     @Test
     void queryById() {
         try {
-            University university = universityManager.queryById(1L);
-            System.out.println(university);
+            University u1 = universityManager.queryById(1L);
+            System.out.println(u1);
+
+            University u2 = universityManager.queryById(2L);
+            System.out.println(u2);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,8 +1,8 @@
 package org.yan.common.builders;
 
-import org.yan.common.domain.Page;
-import org.yan.common.domain.PageBar;
-import org.yan.common.domain.PageContentInfo;
+import org.yan.common.domain.page.Page;
+import org.yan.common.domain.page.PageBar;
+import org.yan.common.domain.page.PageContentInfo;
 
 import java.util.List;
 
