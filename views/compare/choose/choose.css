@@ -1,0 +1,162 @@
+* {
+    margin: 0 0;
+    padding: 0 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+div {
+    width: 100%;
+    /*background-color: white;*/
+}
+
+#main-div {
+    height: 650px;
+}
+
+#banner {
+    height: 100px;
+    background-color: #01AAED;
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#content-div {
+    margin-top: 50px;
+}
+
+.segment-outer {
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 3px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.title {
+    font-family: sans-serif;;
+    font-size: 1.2em;
+}
+
+#select-major-outer-div {
+    width: 330px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+#select-major-title-div {
+    height: 40%;
+    text-align: left;
+}
+
+#select-major-title-div > span {
+    margin-left: 10px;
+}
+
+#select-major-content {
+    height: 60%;
+    text-align: center;
+}
+
+#select-major-content > span {
+    font-family: cursive;
+    color: #1AA093;
+}
+
+#select-major-content a {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+#select-major-content a > img {
+    width: 100%;
+    height: 100%;
+}
+
+/*选择院校*/
+#select-university-outer-div {
+    width: 330px;
+    height: 200px;
+    margin: 20px auto 0;
+}
+
+#select-university-title-div {
+    height: 20%;
+}
+
+#select-university-title-div > span {
+    margin-left: 10px;
+}
+
+#university-items-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.university-item {
+    height: 124px;
+    width: 100px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.item-content-wrapper {
+    width: 94px;
+    height: 94px;
+    padding: 2px;
+    position: relative;
+    text-align: center;
+    /*border: 1px solid #1AA093;*/
+}
+
+.item-content-wrapper > a {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.item-remove-icon-wrapper {
+    background-color: #1AA093;
+    border-radius: 50px;
+}
+
+.item-content-img-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.university-item__name {
+    text-align: center;
+    margin: 0;
+}
+
+/*按钮*/
+.button-outer {
+    border: 1px solid #1AA093;
+    border-radius: 10px 10px;
+    box-shadow: 2px 3px 2px 1px rgba(0, 0, 255, .2);
+}
+
+#compare-button-div {
+    width: 330px;
+    margin: 20px auto 0;
+}
+
+#compare-button-div > button {
+    background-color: #1AA093;
+    width: 100%;
+    border-radius: inherit;
+}

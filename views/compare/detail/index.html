@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Compare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="topNav.css">
+
+    <!-- including ECharts file -->
+    <script src="/js/echarts.js"></script>
+</head>
+<body>
+
+<div id="top-nav" class="top-nav">
+    <!--返回按钮-->
+    <div class="top-nav__icon-wrapper">
+        <img src="img/arrow-left-bold.png">
+    </div>
+    <!--标题-->
+    <div class="top-nav__title-wrapper">
+        院校对比
+    </div>
+    <!--分享按钮-->
+    <div class="top-nav__icon-wrapper">
+        <img src="img/share.png">
+    </div>
+</div>
+<div class="compare-detail">
+    <!--头部信息区-->
+    <div class="compare-detail__header-wrapper" id="detail-header">
+        <div class="major-name-wrapper">
+            <h3>软件工程</h3>
+        </div>
+        <div class="university-name-wrapper">
+            <h3>复旦大学</h3>|<h3>东南大学</h3>
+        </div>
+        <div class="university-choice-button-wrapper">
+            <button>重新选择</button>
+        </div>
+    </div>
+
+    <div class="compare-detail__content-wrapper">
+        <!--按钮区(一系列items-实现交互逻辑-控制流)-->
+        <div class="content-control segment-outer">
+            <div class="content-control__item--selected">
+                <div class="content-control__item-button">
+                    <img src="img/university.png">
+                </div>
+                <div class="content-control__item-title">院校实力</div>
+            </div>
+            <div class="content-control__item">
+                <div class="content-control__item-button">
+                    <img src="img/score.png">
+                </div>
+                <div class="content-control__item-title">分数线</div>
+            </div>
+            <div class="content-control__item">
+                <div class="content-control__item-button">
+                    <img src="img/university.png">
+                </div>
+                <div class="content-control__item-title">竞争力</div>
+            </div>
+            <div class="content-control__item">
+                <div class="content-control__item-button">
+                    <img src="img/university.png">
+                </div>
+                <div class="content-control__item-title">考试科目</div>
+            </div>
+            <div class="content-control__item">
+                <div class="content-control__item-button">
+                    <img src="img/university.png">
+                </div>
+                <div class="content-control__item-title">研究方向</div>
+            </div>
+        </div>
+        <button id="temp-button">切换</button>
+        <!--内容区-->
+        <div class="content content-wrapper" id="compare-detail-content">
+            <!--综合比较-->
+            <section class="container--show" id="comprehensive-compare">
+                <table>
+                    <caption>院校实力比较</caption>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <!--表头-->
+                        <template id="university-table-header">
+                            <th scope="col" class="item-th"></th>
+                        </template>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!--表内容-->
+                    <template id="university-table-data">
+                        <tr>
+                            <th scope="row" class="item-data"></th>
+                        </tr>
+                    </template>
+                    </tbody>
+                </table>
+            </section>
+
+            <!--分数线比较-->
+            <section class="container--show" id="grades-compare">
+                <div>
+                    <div class="chart-title">title</div>
+                    <div class="grade-chart" id="main">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!--Template模板区-->
+
+
+<script src="/js/view/detail.js" type="module"></script>
+</body>
+</html>

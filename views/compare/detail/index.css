@@ -1,0 +1,158 @@
+h1, h2, h3 {
+    margin: 0;
+}
+
+body {
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+caption {
+    padding: 8px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    /*border: 2px solid rgb(100, 100, 100);*/
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .7rem;
+}
+
+td,
+th {
+    border: 1px solid rgb(100, 100, 100);
+    padding: 10px 10px;
+}
+
+td {
+    text-align: center;
+}
+
+.compare-detail {
+    width: 100%;
+}
+
+.compare-detail__header-wrapper {
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    color: white;
+    background-color: #148cf1;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.major-name-wrapper {
+    height: 30%;
+}
+
+.university-name-wrapper {
+    height: 30%;
+}
+
+.university-choice-button-wrapper {
+    height: 30%;
+    vertical-align: center;
+}
+
+.university-name-wrapper > h3 {
+    display: inline-block;
+}
+
+.compare-detail__content-wrapper {
+    width: 100%;
+    margin-top: 25px;
+}
+
+.university-item-1 {
+    background-color: #2D93CA;
+}
+
+.university-item-2 {
+    background-color: #ffe8d4;
+}
+
+.segment-outer {
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 3px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.content-control {
+    width: 330px;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.content-control__item--selected,
+.content-control__item {
+    width: 50px;
+    height: 60px;
+    /*border: 1px solid #1AA093;*/
+}
+
+.content-control__item-button {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #1AA093;
+    border-radius: 50px;
+
+    cursor: pointer
+}
+
+
+.content-control__item-button > img {
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.content-control__item-title {
+    height: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+}
+
+
+.content-wrapper {
+    margin-top: 20px;
+}
+
+.container,
+.container--show,
+.container--hidden {
+    margin: 0 auto;
+    width: 330px;
+    min-height: 200px;
+
+    border: 1px solid black;
+    box-shadow: 2px 3px 2px 1px rgba(0, 0, 255, .2);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.container--hidden {
+    display: none;
+}
+
+
+.container > table {
+    width: 100%;
+    height: 100%;
+}
+
+.grade-chart {
+    width: 100%;
+    height: 300px;
+}
+

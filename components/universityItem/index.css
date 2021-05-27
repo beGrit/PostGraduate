@@ -1,0 +1,45 @@
+img {
+    height: 100%;
+    width: 100%;
+}
+
+#university-item {
+    width: 100px;
+    height: 124px;
+}
+
+.item-content-wrapper {
+    width: 94px;
+    height: 94px;
+    padding: 2px;
+    position: relative;
+    text-align: center;
+    border: 1px solid #1AA093;
+}
+
+.item-content-wrapper > a {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.item-remove-icon-wrapper {
+    background-color: #1AA093;
+    border-radius: 50px;
+}
+
+.item-content-img-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.university-item__name {
+    text-align: center;
+    margin: 0;
+}
