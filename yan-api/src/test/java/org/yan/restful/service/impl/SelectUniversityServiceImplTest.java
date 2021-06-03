@@ -1,29 +1,27 @@
-package org.yan.persistence.repository;
+package org.yan.restful.service.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.yan.persistence.entity.major.Grade;
-import org.yan.persistence.entity.major.UniversityOpenMasterMajor;
+import org.yan.admin.exception.basic.CrudException;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class UniversityOpenMasterMajorRepositoryTest {
+class SelectUniversityServiceImplTest {
 
     @Autowired
-    UniversityOpenMasterMajorRepository repository;
+    SelectUniversityServiceImpl service;
 
     @Test
-    void existsByUniversity_IdAndMasterMajor_Id() {
-    }
-
-    @Test
-    void findByUniversity_IdAndMasterMajor_Id() {
+    void getSelectList() throws CrudException {
+        List<Object> rtn = service.getSelectList();
+        System.out.println();
     }
 }

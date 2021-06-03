@@ -140,4 +140,16 @@ class UniversityRepositoryTest {
         universityRepository.deleteById(4L);
         System.out.println();
     }
+
+    @Test
+    void findAllByCityId() {
+        Optional<List<University>> optional = universityRepository.findAllByCityId(2L);
+        if (optional.isPresent()) {
+            optional.get().forEach(university -> {
+                System.out.println(university.getName());
+            });
+        } else {
+            
+        }
+    }
 }

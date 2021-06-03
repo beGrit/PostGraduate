@@ -6,30 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.yan.admin.exception.basic.DeleteException;
+import org.yan.common.exception.basic.DeleteException;
 import org.yan.persistence.entity.university.Location;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class LocationServiceTest {
+class LocationManagerTest {
 
     @Autowired
-    LocationService locationService;
+    LocationManager locationManager;
 
     @Test
     void isExist() {
         Location location1 = new Location(1L, 1.0, 2.0);
-        boolean exist1 = locationService.isExist(location1);
+        boolean exist1 = locationManager.isExist(location1);
         assert exist1;
 
         Location location2 = new Location(5L, 1.0, 1.0);
-        boolean exist2 = locationService.isExist(location2);
+        boolean exist2 = locationManager.isExist(location2);
         assert exist2;
 
         Location location3 = new Location(5L, 5.0, 3.0);
-        boolean exist3 = locationService.isExist(location3);
+        boolean exist3 = locationManager.isExist(location3);
         assert !exist3;
     }
 
@@ -38,7 +36,7 @@ class LocationServiceTest {
     void delete() {
         boolean b1 = false;
         try {
-            b1 = locationService.delete(3L);
+            b1 = locationManager.delete(3L);
         } catch (DeleteException e) {
             e.printStackTrace();
         }
@@ -46,7 +44,7 @@ class LocationServiceTest {
 
         boolean b2 = false;
         try {
-            b2 = locationService.delete(4L);
+            b2 = locationManager.delete(4L);
         } catch (DeleteException e) {
             e.printStackTrace();
         }
@@ -55,7 +53,7 @@ class LocationServiceTest {
 
         boolean b3 = false;
         try {
-            b3 = locationService.delete(5L);
+            b3 = locationManager.delete(5L);
         } catch (DeleteException e) {
             e.printStackTrace();
         }

@@ -3,18 +3,19 @@ package org.yan.admin.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yan.admin.exception.basic.CrudException;
 import org.yan.admin.exception.basic.QueryException;
-import org.yan.admin.service.LocationService;
+import org.yan.admin.service.LocationManager;
 import org.yan.admin.service.UniversityManager;
+import org.yan.common.exception.basic.DeleteException;
 import org.yan.persistence.entity.university.Location;
 import org.yan.persistence.entity.university.University;
 import org.yan.persistence.repository.LocationRepository;
 import org.yan.persistence.repository.UniversityRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class UniversityManagerImpl implements UniversityManager {
     LocationRepository locationRepository;
 
     @Autowired
-    LocationService locationService;
+    LocationManager locationManager;
 
     public boolean isLocationUsed(Long locationId) {
         boolean b = universityRepository.existsUniversityByLocation_Id(locationId);
@@ -57,6 +58,16 @@ public class UniversityManagerImpl implements UniversityManager {
         for (Long id : idList) {
             delete(id);
         }
+    }
+
+    @Override
+    public List<University> queryByIdList(Long[] idList) throws QueryException {
+        List<University> universityList = new ArrayList<>();
+        for (int i = 0; i < idList.length; i++) {
+            University university = this.queryById(idList[i]);
+            universityList.add(university);
+        }
+        return universityList;
     }
 
     public University queryById(Long uid) throws QueryException {
@@ -91,10 +102,10 @@ public class UniversityManagerImpl implements UniversityManager {
     }
 
     @Override
-    public void updateUniversityLocation(Long uid, Location newLocation) throws CrudException {
+    public void updateUniversityLocation(Long uid, Location newLocation) throws CrudException, DeleteException {
         University university = queryById(uid);
         Location oldLocation = university.getLocation();
-        boolean exist = locationService.isExist(newLocation);
+        boolean exist = locationManager.isExist(newLocation);
         if (exist) {
             if (oldLocation.getId().equals(newLocation.getId())) {
                 locationRepository.save(newLocation);
@@ -105,7 +116,7 @@ public class UniversityManagerImpl implements UniversityManager {
             newLocation = locationRepository.save(newLocation);
             university.setLocation(newLocation);
             universityRepository.save(university);
-            locationService.delete(oldLocation.getId());
+            locationManager.delete(oldLocation.getId());
         }
     }
 }

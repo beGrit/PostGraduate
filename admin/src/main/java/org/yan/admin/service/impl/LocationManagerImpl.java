@@ -7,12 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.yan.admin.exception.basic.DeleteException;
-import org.yan.admin.exception.basic.QueryException;
-import org.yan.admin.exception.basic.UpdateException;
-import org.yan.admin.service.LocationService;
+
+import org.yan.admin.service.LocationManager;
 import org.yan.admin.service.UniversityManager;
 import org.yan.common.domain.page.PageParam;
+import org.yan.common.exception.basic.DeleteException;
+import org.yan.common.exception.basic.QueryException;
+import org.yan.common.exception.basic.UpdateException;
 import org.yan.persistence.entity.university.Location;
 import org.yan.persistence.repository.LocationRepository;
 
@@ -20,9 +21,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LocationServiceImpl implements LocationService {
+public class LocationManagerImpl implements LocationManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocationServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocationManagerImpl.class);
 
     @Autowired
     LocationRepository locationRepository;

@@ -39,4 +39,16 @@ class CityRepositoryTest {
             System.out.println(university.getName());
         }
     }
+
+
+    @Test
+    void testFindAll() {
+        Iterable<City> all = repository.findAll();
+        all.forEach(city -> {
+            System.out.println(city.getName());
+            city.getUniversitySet().forEach(university -> {
+                System.out.print(university.getName() + " ");
+            });
+        });
+    }
 }

@@ -70,6 +70,16 @@ public class Grade {
         this.year = year;
     }
 
+    public static int gradeYearCompare(Grade grade, Grade otherGrade) {
+        int year1 = Integer.parseInt(grade.getYear());
+        int year2 = Integer.parseInt(otherGrade.getYear());
+        if (year1 < year2) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
     @Override
     public String toString() {
         return "Grade{" +

@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.yan.persistence.entity.university.University;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface UniversityRepository extends PagingAndSortingRepository<University, Long> {
     Page<University> findByNameIs(String name, Pageable pageable);
 
@@ -31,4 +34,6 @@ public interface UniversityRepository extends PagingAndSortingRepository<Univers
 
     @Override
     void deleteById(Long aLong);
+
+    Optional<List<University>> findAllByCityId(Long cid);
 }

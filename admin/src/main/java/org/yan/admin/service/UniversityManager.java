@@ -3,6 +3,7 @@ package org.yan.admin.service;
 import org.yan.admin.exception.basic.CrudException;
 import org.yan.admin.exception.basic.QueryException;
 import org.yan.admin.exception.basic.UpdateException;
+import org.yan.common.exception.basic.DeleteException;
 import org.yan.persistence.entity.university.Location;
 import org.yan.persistence.entity.university.University;
 
@@ -27,7 +28,7 @@ public interface UniversityManager {
      * @param location
      * @throws UpdateException
      */
-    void updateUniversityLocation(Long uid, Location location) throws CrudException;
+    void updateUniversityLocation(Long uid, Location location) throws CrudException, DeleteException;
 
     /**
      * 判断某个Location是否被占用
@@ -45,4 +46,6 @@ public interface UniversityManager {
     void delete(Long uid) throws CrudException;
 
     void batchDelete(List<Long> idList) throws CrudException;
+
+    List<University> queryByIdList(Long[] idList) throws QueryException;
 }
