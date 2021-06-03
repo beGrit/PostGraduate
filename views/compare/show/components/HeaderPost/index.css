@@ -1,0 +1,16 @@
+.major-name-wrapper {
+    height: 30%;
+}
+
+.university-name-wrapper {
+    height: 30%;
+}
+
+.university-choice-button-wrapper {
+    height: 30%;
+    vertical-align: center;
+}
+
+.university-name-wrapper > h3 {
+    display: inline-block;
+}

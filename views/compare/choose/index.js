@@ -1,3 +1,5 @@
+import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
+
 window.onload = function () {
     class UniversityItem {
         constructor(id) {
@@ -26,9 +28,19 @@ window.onload = function () {
             if (this.isSelected()) {
                 // 修改class状态
                 this.root.className = "university-item";
-                this.closeEntrance.style.display = "none";
-                this.img.setAttribute("src", "img/unSelected.png");
+                const outer = this.root.querySelector(".university-item-outer");
+                outer.remove();
+
+                let emptyTemplate = document.querySelector("#unSelected-button");
+                let clone = emptyTemplate.content.cloneNode(true);
+                this.root.appendChild(clone);
+                // this.closeEntrance.style.display = "none";
+                // this.img.setAttribute("src", "imgs/unSelected.png");
             }
+        }
+
+        addUniversity() {
+
         }
     }
 
@@ -45,4 +57,6 @@ window.onload = function () {
             evt.preventDefault();
         });
     });
+
+    customElements.define("top-nav-bar-component", TopNavBarComponent);
 }

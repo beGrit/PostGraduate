@@ -96,10 +96,9 @@ div {
     align-items: center;
 }
 
-
-.university-item {
-    height: 124px;
-    width: 100px;
+.university-item,
+.university-item--selected {
+    width: 30%;
 }
 
 img {

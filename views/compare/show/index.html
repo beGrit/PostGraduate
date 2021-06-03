@@ -5,39 +5,19 @@
     <title>Detail Compare</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="topNav.css">
 
     <!-- including ECharts file -->
     <script src="/js/echarts.js"></script>
 </head>
 <body>
+<!--顶部导航栏-->
+<top-nav-bar-component title="院校比较"></top-nav-bar-component>
 
-<div id="top-nav" class="top-nav">
-    <!--返回按钮-->
-    <div class="top-nav__icon-wrapper">
-        <img src="img/arrow-left-bold.png">
-    </div>
-    <!--标题-->
-    <div class="top-nav__title-wrapper">
-        院校对比
-    </div>
-    <!--分享按钮-->
-    <div class="top-nav__icon-wrapper">
-        <img src="img/share.png">
-    </div>
-</div>
+<!--数据区-->
 <div class="compare-detail">
     <!--头部信息区-->
-    <div class="compare-detail__header-wrapper" id="detail-header">
-        <div class="major-name-wrapper">
-            <h3>软件工程</h3>
-        </div>
-        <div class="university-name-wrapper">
-            <h3>复旦大学</h3>|<h3>东南大学</h3>
-        </div>
-        <div class="university-choice-button-wrapper">
-            <button>重新选择</button>
-        </div>
+    <div class="header-outer">
+        <header-post-component id="detail-header"></header-post-component>
     </div>
 
     <!--内容区域-->
@@ -93,6 +73,7 @@
                         <template id="university-table-header">
                             <tr>
                                 <th colspan="1" scope="col" class="item-th"></th>
+                                <!--渲染th-->
                             </tr>
                         </template>
                         </thead>
@@ -109,8 +90,8 @@
                 </div>
                 <!--分数线比较-->
                 <div class="content-container-panel" id="grades-compare">
-                    <div>
-                        <div class="chart-title">title</div>
+                    <div class="chart-outer">
+                        <div class="chart-title">院校成绩对比</div>
                         <div class="grade-chart" id="main">
                         </div>
                     </div>
@@ -123,6 +104,6 @@
         </div>
     </div>
 </div>
-<script src="/js/view/detail.js" type="module"></script>
+<script src="index.js" type="module"></script>
 </body>
 </html>

@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" href="choose.css">
+    <link rel="stylesheet" href="index.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<!--顶部导航栏-->
+<top-nav-bar-component title="比较院校"></top-nav-bar-component>
+
 <div id="main-div">
     <div id="banner">
         <p>选择专业及院校</p>
@@ -31,13 +34,22 @@
             <div id="select-university-title-div" class="title">
                 <span>目标院校</span>
             </div>
+
+            <template id="unSelected-button">
+                <div class="university-item-outer">
+                    <button class="unSelected-button">
+                        <img src="imgs/unSelected.png">
+                    </button>
+                </div>
+            </template>
+
             <div id="university-items-div">
                 <div id="item-1" class="university-item--selected">
-                    <div class="university-item--selected">
+                    <div class="university-item-outer">
                         <div class="item-content-wrapper">
                             <a class="item-remove" href="#">
                                 <div class="item-remove-icon-wrapper">
-                                    <img src="imgs/close-bold.png" height="10" width="10">
+                                    <img src="imgs/close-bold.png">
                                 </div>
                             </a>
                             <div class="item-content-img-wrapper">
@@ -49,7 +61,7 @@
                 </div>
 
                 <div id="item-2" class="university-item--selected">
-                    <div class="university-item--selected">
+                    <div class="university-item-outer">
                         <div class="item-content-wrapper">
                             <a class="item-remove" href="#">
                                 <div class="item-remove-icon-wrapper">
@@ -65,7 +77,7 @@
                 </div>
 
                 <div id="item-3" class="university-item--selected">
-                    <div class="university-item--selected">
+                    <div class="university-item-outer">
                         <div class="item-content-wrapper">
                             <a class="item-remove" href="#">
                                 <div class="item-remove-icon-wrapper">
@@ -88,6 +100,6 @@
     </div>
 </div>
 </body>
-<script src="choose.js"></script>
+<script src="index.js" type="module"></script>
 </html>
 

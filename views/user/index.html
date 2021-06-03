@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+<!--顶部导航栏-->
+<top-nav-bar-component title="用户信息"></top-nav-bar-component>
+
+<div class="data-container">
+
+    <div class="user-info-outer">
+        <div class="user-info-inner" id="user_info_box">
+            <div class="user-info-inner-basic">
+                <div id="msg_img">
+                    <img src="" alt=""/>
+                </div>
+                <div id="user_nickname">
+                    <h3>pocky1314</h3>
+                    <p>北京大学 <span>马克思主义哲学</span></p>
+                </div>
+                <div id="more">
+                    <span>>></span>
+                </div>
+            </div>
+            <div class="user-info-inner-numInfo">
+                <div>
+                    <span id="">2</span>
+                    <p>帖子</p>
+                </div>
+                <div>
+                    <span>3</span>
+                    <p>回复</p>
+                </div>
+                <div>
+                    <span>12</span>
+                    <p>收藏</p>
+                </div>
+                <div>
+                    <sapn>11.2h</sapn>
+                    <p>学习时长</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="support-container-outer">
+        <section class="support-container-inner">
+            <div class="support-info user-services" id="user-services">
+                <h3>我的服务</h3>
+                <div class="user-services-box box">
+                    <div class="user-services-box-item box-item">
+                        <div class="user-services-box-item-img box-item-img">
+                            <img src="/image/meh.png">
+                        </div>
+                        <span class="user-services-box-item-text box-item-text">我的消息</span>
+                    </div>
+                    <div class="user-services-box-item box-item">
+                        <div class="user-services-box-item-img box-item-img">
+                            <img src="/image/meh.png">
+                        </div>
+                        <span class="user-services-box-item-text box-item-text">我的消息</span>
+                    </div>
+                    <div class="user-services-box-item box-item">
+                        <div class="user-services-box-item-img box-item-img">
+                            <img src="/image/meh.png">
+                        </div>
+                        <span class="user-services-box-item-text box-item-text">我的消息</span>
+                    </div>
+                    <div class="user-services-box-item box-item">
+                        <div class="user-services-box-item-img box-item-img">
+                            <img src="/image/meh.png">
+                        </div>
+                        <span class="user-services-box-item-text box-item-text">我的消息</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="support-info user-tools" id="user-tools">
+                <h3>更多工具</h3>
+                <div class="user-tools-box box">
+                    <div class="user-tools-box-item box-item">
+                        <div class="user-tools-box-item-img box-item-img">
+                            <img src="/image/meh.png">
+                        </div>
+                        <span class="user-tools-box-item-text box-item-text">音频资料</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<bottom-nav-component selectedIndex="3"></bottom-nav-component>
+</body>
+<script src="index.js" type="module"></script>
+</html>

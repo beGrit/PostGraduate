@@ -1,7 +1,8 @@
 import {Component} from "/js/base.js";
-import {fetchUniversityByIds} from "/js/ajax.js";
+import {fetchUniversityByIds} from "/js/adminAPI.js";
 import {initChart} from "/js/grades-compare.js";
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
+import {HeaderPostComponent} from "./components/HeaderPost";
 
 window.onload = function () {
 
@@ -18,7 +19,7 @@ window.onload = function () {
                 return universities;
             })
             .then(universities => {
-                c2.render(universities);
+                c1.render(universities);
             })
             .catch(reason => {
                 c1.render(null);
@@ -70,24 +71,29 @@ window.onload = function () {
     }
 
     /*Header*/
-    class CompareDetailHeader extends Component {
-        constructor(id) {
-            super();
-            this.container = document.querySelector("#" + id);
-        }
 
-        registerPlugin(...plugins) {
+    /*
+        class CompareDetailHeader extends Component {
+            constructor(id) {
+                super();
+                this.container = document.querySelector("#" + id);
+            }
 
-        }
+            registerPlugin(...plugins) {
 
-        render(data) {
-            const nameWrapper = this.container.querySelector(".university-name-wrapper");
-            const child1 = nameWrapper.firstElementChild;
-            const child2 = child1.nextElementSibling;
-            child1.textContent = data[0];
-            child2.textContent = data[1];
+            }
+
+            render(data) {
+                const nameWrapper = this.container.querySelector(".university-name-wrapper");
+                const child1 = nameWrapper.firstElementChild;
+                const child2 = child1.nextElementSibling;
+                child1.textContent = data[0];
+                child2.textContent = data[1];
+            }
         }
-    }
+        const c2 = new CompareDetailHeader("detail-header");
+
+    */
 
     class PanelContainer extends Component {
         constructor() {
@@ -240,7 +246,6 @@ window.onload = function () {
     }
 
     const c1 = new CompositeComparePanel("comprehensive-compare");
-    const c2 = new CompareDetailHeader("detail-header");
     const contentController = new ContentController("content-controller");
     const contentContainer = new PanelContainer();
 
@@ -249,7 +254,17 @@ window.onload = function () {
     initialData(1, 2);
     initChart("main");
 
+    let data = {
+        "m_name": "哲学",
+        "u_names": [
+            "复旦大学", "北京大学"
+        ]
+    }
+    const detailHeader = document.querySelector("#detail-header");
+    detailHeader.data = data;
+
     customElements.define("top-nav-bar-component", TopNavBarComponent);
+    customElements.define("header-post-component", HeaderPostComponent);
 }
 
 
