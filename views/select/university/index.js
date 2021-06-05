@@ -104,5 +104,5 @@ window.onload = function () {
 
     initialData();
 
-    customElements.define("top-nav-bar-component", TopNavBarComponent);
+    // customElements.define("top-nav-bar-component", TopNavBarComponent);
 }

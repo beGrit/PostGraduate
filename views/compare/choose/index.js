@@ -58,5 +58,5 @@ window.onload = function () {
         });
     });
 
-    customElements.define("top-nav-bar-component", TopNavBarComponent);
+    // customElements.define("top-nav-bar-component", TopNavBarComponent);
 }

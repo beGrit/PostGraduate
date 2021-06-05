@@ -1,0 +1,46 @@
+details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em .5em 0;
+}
+
+summary i {
+    float: right;
+}
+
+ol {
+    padding: 0;
+}
+
+li {
+    width: 100%;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+
+.list-wrapper {
+    width: 100%;
+}
+
+.list-outer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.list-inner {
+    width: 100%;
+}
+
+.university-list li {
+    display: flex;
+    justify-content: space-between;
+
+}

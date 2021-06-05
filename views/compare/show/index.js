@@ -2,7 +2,7 @@ import {Component} from "/js/base.js";
 import {fetchUniversityByIds} from "/js/adminAPI.js";
 import {initChart} from "/js/grades-compare.js";
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
-import {HeaderPostComponent} from "./components/HeaderPost";
+import {HeaderPostComponent} from "/views/compare/show/components/HeaderPost/index.js";
 
 window.onload = function () {
 
@@ -262,9 +262,7 @@ window.onload = function () {
     }
     const detailHeader = document.querySelector("#detail-header");
     detailHeader.data = data;
-
-    customElements.define("top-nav-bar-component", TopNavBarComponent);
-    customElements.define("header-post-component", HeaderPostComponent);
+    // detailHeader.render();
 }
 
 

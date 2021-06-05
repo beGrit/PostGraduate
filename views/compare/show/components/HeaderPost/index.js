@@ -39,6 +39,14 @@ class HeaderPostComponent extends HTMLElement {
     }
 
     render(data) {
+        if (data === null || data === undefined) {
+            data = {
+                "m_name": "哲学",
+                "u_names": [
+                    "复旦大学", "北京大学"
+                ]
+            }
+        }
         const majorHeader = this.shadowRoot.querySelector(".major-name-wrapper h3");
         const uWrapper = this.shadowRoot.querySelector(".university-name-wrapper");
 
@@ -58,3 +66,6 @@ class HeaderPostComponent extends HTMLElement {
 }
 
 export {HeaderPostComponent};
+
+customElements.define("header-post-component", HeaderPostComponent);
+
