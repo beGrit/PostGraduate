@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yan-api</artifactId>
+    <artifactId>yan-security</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -17,31 +17,15 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.yan</groupId>
-            <artifactId>yan-security</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.yan</groupId>
-            <artifactId>yan-orm-jap</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>org.yan</groupId>
             <artifactId>yan-commons</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.yan</groupId>
-            <artifactId>yan-admin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
     </dependencies>
 </project>

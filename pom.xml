@@ -9,12 +9,13 @@
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>admin</module>
-        <module>persistence</module>
-        <module>portal</module>
-        <module>common</module>
-        <module>dao</module>
+        <module>yan-admin</module>
+        <module>yan-orm-jpa</module>
+        <module>yan-portal</module>
+        <module>yan-commons</module>
+        <module>yan-orm-mybatis</module>
         <module>yan-api</module>
+        <module>yan-security</module>
     </modules>
 
     <parent>
