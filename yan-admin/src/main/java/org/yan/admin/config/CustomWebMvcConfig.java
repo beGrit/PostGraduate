@@ -18,7 +18,8 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/admin/welcome").setViewName("pages/welcome");
         registry.addViewController("/admin/university/pageView").setViewName("university/index");
-        registry.addViewController("/admin/university/addView").setViewName("university/add");
+        registry.addViewController("/admin/university/addView").setViewName("university/add/index");
+        registry.addViewController("/admin/university/detailView").setViewName("university/detail/index");
     }
 
     @Override
@@ -33,6 +34,7 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**").allowedOrigins("http://localhost:8000");
+                registry.addMapping("/api/**").allowedOrigins("http://localhost:8001");
             }
         };
     }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/api/*/university/*", "/api/v2.2/userinfo/*"})
+@WebFilter(urlPatterns = {"/api/v2.1/university/*"})
 public class AuthenticationFilter implements Filter {
 
     private Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
@@ -29,7 +29,6 @@ public class AuthenticationFilter implements Filter {
             CommonResult<Object> res = CommonResult.unauthorized(null);
 
             String json = objectMapper.writeValueAsString(res);
-
 
             resp.setStatus(200);
             resp.setContentType("application/json");

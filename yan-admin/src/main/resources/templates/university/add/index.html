@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="x-body">
-    <form class="layui-form" action="">
+    <form class="layui-form">
         <!--表单内容区域-->
         <div class="layui-inline">
             <label class="layui-form-label">院校ID</label>
@@ -25,13 +25,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">院校名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" required  lay-verify="required" placeholder="请输入院校名称" autocomplete="off" class="layui-input">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入院校名称" autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">官方网址</label>
             <div class="layui-input-block">
-                <input type="text" name="officialUrl" required  lay-verify="required" placeholder="请输入院校官方网址" autocomplete="off" class="layui-input">
+                <input type="text" name="officialUrl" required lay-verify="required" placeholder="请输入院校官方网址"
+                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -74,5 +76,31 @@
         </div>
     </form>
 </div>
+<script>
+    window.onload = function () {
+
+        let formElement = document.querySelector("form");
+
+        formElement.addEventListener("submit", evt => {
+            evt.preventDefault();
+            const formData = new FormData(formElement);
+            let data = {};
+            formData.forEach((value, key) => data[key] = value);
+            console.log(data);
+            const url = "/api/v2.1/university/one";
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(resp => {
+                console.log(resp.json())
+            });
+        })
+
+    }
+</script>
 </body>
 </html>

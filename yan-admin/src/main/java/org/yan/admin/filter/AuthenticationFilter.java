@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/api/v2.1/university/*")
+//@WebFilter(urlPatterns = ")
 public class AuthenticationFilter implements Filter {
 
     private Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);

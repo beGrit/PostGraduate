@@ -40,7 +40,7 @@
         <button class="layui-btn layui-btn-danger" @click="deleteByIdList(idList)"><i class="layui-icon"></i>批量删除
         </button>
         <button class="layui-btn"
-                onclick="x_admin_show('Add_Book','/admin/university/addView')"><i
+                onclick="x_admin_show('添加院校','/admin/university/addView')"><i
                 class="layui-icon"></i>添加
         </button>
         <span class="x-right" style="line-height:40px">共有数据：{{ this.pageBar.totalRecords }} 条</span>
@@ -69,7 +69,10 @@
             <td>{{ item.isYJSY }}</td>
             <td>{{ item.isZHX }}</td>
             <td>
-                <button @click="showDetail(item)">查看详情</button>
+                <button class="layui-btn"
+                        onclick="x_admin_show('查看详情','/admin/university/detailView')">
+                    查看详情
+                </button>
             </td>
         </tr>
         <div v-else>

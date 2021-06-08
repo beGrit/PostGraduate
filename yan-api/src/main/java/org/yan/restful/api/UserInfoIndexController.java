@@ -19,7 +19,11 @@ public class UserInfoIndexController {
 
     @RequestMapping(value = "detail", method = RequestMethod.GET)
     public CommonResult getData(HttpSession session) {
-        Long userId = Long.parseLong(String.valueOf(session.getAttribute("userId")));
+        Object raw = session.getAttribute("userId");
+        Long userId = 1L;
+        if (raw != null) {
+            userId = Long.parseLong((String) raw);
+        }
         UserDetailInfo detailInfo = service.getDetail(userId);
         return CommonResult.success(detailInfo);
     }
