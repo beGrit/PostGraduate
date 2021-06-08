@@ -1,6 +1,5 @@
 package org.yan.persistence.entity.university;
 
-import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 
@@ -15,13 +14,11 @@ public class Location {
     /**
      * 经度
      */
-    @ApiModelProperty("经度")
     private Double longitude;
 
     /**
      * 纬度
      */
-    @ApiModelProperty("纬度")
         private Double latitude;
 
     @OneToOne(mappedBy = "location", fetch = FetchType.LAZY)

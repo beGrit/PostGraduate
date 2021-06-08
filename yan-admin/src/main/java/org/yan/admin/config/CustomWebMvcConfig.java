@@ -17,9 +17,12 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
         WebMvcConfigurer.super.addViewControllers(registry);
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/admin/welcome").setViewName("pages/welcome");
+
         registry.addViewController("/admin/university/pageView").setViewName("university/index");
         registry.addViewController("/admin/university/addView").setViewName("university/add/index");
         registry.addViewController("/admin/university/detailView").setViewName("university/detail/index");
+
+        registry.addViewController("/admin/location/pageView").setViewName("location/index");
     }
 
     @Override

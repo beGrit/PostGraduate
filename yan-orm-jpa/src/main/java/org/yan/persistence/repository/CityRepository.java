@@ -3,10 +3,10 @@ package org.yan.persistence.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.yan.persistence.entity.university.City;
-import org.yan.persistence.entity.university.University;
 
 import java.util.Optional;
 
+//@RepositoryRestResource(collectionResourceRel = "cities", path = "city")
 public interface CityRepository extends CrudRepository<City, Long> {
     City findByNameIs(String name);
 

@@ -1,7 +1,9 @@
-package org.yan.common.config;
+package org.yan.swagger.config;
 
 import org.springframework.context.annotation.Bean;
-import org.yan.common.domain.page.SwaggerProperties;
+
+
+import org.yan.swagger.domain.SwaggerProperties;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;

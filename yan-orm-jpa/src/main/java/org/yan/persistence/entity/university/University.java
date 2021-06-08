@@ -1,8 +1,6 @@
 package org.yan.persistence.entity.university;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
 
@@ -16,54 +14,45 @@ public class University {
     /**
      * 院校名
      */
-    @ApiModelProperty("院校名")
     private String name;
 
     /**
      * 是否为研究生院校 (0 不是, 1 是)
      */
-    @ApiModelProperty("是否是研究生院")
     private int isYJSY;
 
     /**
      * 是否为自划线 (0 不是, 1 是)
      */
-    @ApiModelProperty("是否是自划线")
     private int isZHX;
 
     /**
      * 院校全国排名
      */
-    @ApiModelProperty("排名")
     private int rank;
 
     /**
      * 是否是985院校
      */
-    @ApiModelProperty("是否是985院校")
     private int isJBW;
 
     /**
      * 是否是211院校
      */
-    @ApiModelProperty("是否是211院校")
     private int isEYY;
 
     /**
      * 官方网站地址
      */
-    @ApiModelProperty("官方网址")
     private String officialUrl;
 
     /**
      * 该院校所在的城市
      */
-    @ApiModelProperty("坐落在哪座城市")
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @ApiModelProperty("位置信息")
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;

@@ -1,8 +1,6 @@
 package org.yan.portal.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.yan.common.config.BaseSwaggerConfig;
-import org.yan.common.domain.page.SwaggerProperties;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration

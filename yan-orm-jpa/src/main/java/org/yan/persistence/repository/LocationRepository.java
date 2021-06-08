@@ -29,4 +29,6 @@ public interface LocationRepository extends CrudRepository<Location, Long> {
 
     @Override
     Location save(Location location);
+
+    Long countDistinctByIdNotNull();
 }

@@ -17,4 +17,10 @@ public interface LocationManager {
     List<Location> queryByPage(PageParam pageParam) throws QueryException;
 
     Location save(Location location) throws UpdateException;
+
+    /**
+     * 获取当前所有的位置数量
+     * @return
+     */
+    Long getTotal();
 }

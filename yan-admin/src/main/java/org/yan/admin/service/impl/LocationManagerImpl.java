@@ -91,4 +91,9 @@ public class LocationManagerImpl implements LocationManager {
             return saved;
         }
     }
+
+    @Override
+    public Long getTotal() {
+        return locationRepository.countDistinctByIdNotNull();
+    }
 }

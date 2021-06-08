@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.yan.admin.service.LocationManager;
 import org.yan.common.api.CommonResult;
+import org.yan.common.domain.page.Page;
 import org.yan.common.domain.page.PageParam;
 import org.yan.common.exception.basic.QueryException;
 import org.yan.common.exception.basic.UpdateException;
+import org.yan.common.facotry.PageFactory;
 import org.yan.persistence.entity.university.Location;
 
 import java.util.List;
@@ -31,6 +33,8 @@ public class LocationController {
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public CommonResult queryByPage(PageParam pageParam) throws QueryException {
         List<Location> locations = locationManager.queryByPage(pageParam);
-        return CommonResult.success(locations);
+        Long count = locationManager.getTotal();
+        Page<Location> page = new PageFactory<Location>().getPage(pageParam.getPageIndex(), pageParam.getPageSize(), count, locations);
+        return CommonResult.success(page);
     }
 }
