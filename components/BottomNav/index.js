@@ -6,13 +6,13 @@ template.innerHTML = `
 <link href="/components/BottomNav/index.css" rel="stylesheet"/>
 <div id="bottom-nav" class="bottom-nav">
     <div class="bottom-nav-item--selected">
-        <a href="/views/concern/index.html">关注</a>
+        <a href="/views/home/index.html">首页</a>
     </div>
     <div class="bottom-nav-item">
-        <a href="#">院校</a>
+        <a href="/views/university/index.html">院校</a>
     </div>
     <div class="bottom-nav-item">
-        <a href="#">专业</a>
+        <a href="/views/major/index.html">专业</a>
     </div>
     <div class="bottom-nav-item">
         <a href="/views/user/index.html">个人</a>

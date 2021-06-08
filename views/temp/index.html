@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div id="app">
+    <top-nav-bar-component title="院校详情"></top-nav-bar-component>
+    <header>
+        <div id="university_box" class="section-box">
+            <div id="share_msg">
+                <div id="grade_box">
+                    <div id="grade" class="icon-item">
+                        <img src="/image/icons/grade.png"/>
+                    </div>
+                    <span>分数线</span>
+                </div>
+                <div>
+                    <div id="blb_box" class="icon-item">
+                        <img src="/image/icons/chart.png"/>
+                    </div>
+                    <span>报录比</span>
+                </div>
+                <div>
+                    <div id="ex_box" class="icon-item">
+                        <img src="/image/icons/experience.png"/>
+                    </div>
+                    <span>备考经验</span>
+                </div>
+                <div>
+                    <div id="label_box" class="icon-item">
+                        <img src="/image/icons/compare.png"/>
+                    </div>
+                    <span>院校比较</span>
+                </div>
+            </div>
+            <div id="university_img">
+                <div id="university_msg">
+                    <div id="university_name"><h3>北京大学</h3></div>
+                    <div id="university_professional"><h4>软件工程</h4></div>
+                </div>
+                <div id="university_nature">
+                    <p>
+                        <span>985</span>
+                        <span>211</span>
+                        <span>自主划线</span>
+                        <span>综合排名 1</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div id="map">
+            <!--            <h2>地理位置</h2>
+                        <iframe src="https://www.baidu.com/?tn=88093251_34_hao_pg" frameborder="0"></iframe>-->
+        </div>
+        <div id="college_counseling_box" class="section-box">
+            <h3 style="margin-left: 20px">院校资讯</h3>
+            <div id="College_counseling">
+                <div class="items-container">
+                    <div class="usage-item-outer">
+                        <span>招生信息</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>招生简章</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>专业目录</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>通知公告</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>分数线</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <bottom-nav-component selectedIndex="1"></bottom-nav-component>
+</div>
+<script src="index.js" type="module"></script>
+</body>
+</html>

@@ -58,5 +58,9 @@ window.onload = function () {
         });
     });
 
-    // customElements.define("top-nav-bar-component", TopNavBarComponent);
+    const compareBtn = document.querySelector("#compare-button-div");
+    compareBtn.addEventListener("click", evt => {
+        evt.preventDefault();
+        window.location.href = "/views/compare/show/index.html";
+    });
 }

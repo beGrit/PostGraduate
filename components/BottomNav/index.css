@@ -1,20 +1,34 @@
 .bottom-nav {
-    width: 375px;
+    width: 350px;
     height: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid #1AA093;
+    border: 1px dashed #1AA093;
+    border-radius: 10px;
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: 15px;
+    box-shadow: none;
+}
+
+.bottom-nav:hover {
+    box-shadow: 1px 2px 3px #00a65a;
 }
 
 .bottom-nav-item,
 .bottom-nav-item--selected {
+    border: 1px;
+    border-radius: 100%;
+    padding: 5px;
+}
 
+.bottom-nav-item,
+.bottom-nav-item--selected > a {
+    text-decoration: none;
 }
 
 .bottom-nav-item--selected {
-    background-color: #1AA093;
+    /*border: 1px solid #1AA093;*/
+    /*color: #00a65a;*/
 }
