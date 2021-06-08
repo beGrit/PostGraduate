@@ -6,7 +6,7 @@ template.innerHTML = `
 <link href="/components/BottomNav/index.css" rel="stylesheet"/>
 <div id="bottom-nav" class="bottom-nav">
     <div class="bottom-nav-item--selected">
-        <a href="/views/index/index.html">关注</a>
+        <a href="/views/concern/index.html">关注</a>
     </div>
     <div class="bottom-nav-item">
         <a href="#">院校</a>
@@ -20,9 +20,7 @@ template.innerHTML = `
     <div class="bottom-nav-item">
         <a href="/views/compare/choose/index.html">比较</a>
     </div>
-</div>
-`
-
+</div>`;
 
 class BottomNavComponent extends HTMLElement {
     constructor() {
