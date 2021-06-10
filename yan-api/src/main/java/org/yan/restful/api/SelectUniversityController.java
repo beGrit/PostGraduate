@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.yan.admin.exception.basic.CrudException;
-import org.yan.admin.service.UniversityManager;
 import org.yan.common.api.CommonResult;
+import org.yan.common.exception.basic.CrudException;
 import org.yan.restful.service.SelectUniversityService;
 
 import java.util.List;

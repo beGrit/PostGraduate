@@ -3,14 +3,13 @@ package org.yan.admin.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yan.admin.domain.ComparedInfo;
-import org.yan.admin.exception.basic.QueryException;
 import org.yan.admin.service.CompareUniversityService;
-import org.yan.admin.service.GradeManager;
-import org.yan.admin.service.UniversityManager;
+import org.yan.admin.service.manager.GradeManager;
+import org.yan.admin.service.manager.UniversityManager;
+import org.yan.common.exception.basic.QueryException;
 import org.yan.persistence.entity.major.Grade;
 import org.yan.persistence.entity.university.University;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service

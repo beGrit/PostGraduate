@@ -2,7 +2,7 @@ package org.yan.restful.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yan.admin.exception.basic.CrudException;
+import org.yan.common.exception.basic.CrudException;
 import org.yan.persistence.entity.university.City;
 import org.yan.persistence.repository.CityRepository;
 import org.yan.persistence.repository.UniversityRepository;

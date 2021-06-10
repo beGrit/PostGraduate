@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Welcome Page</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+</head>
+<body>
+<div id="app">
+    Welcome to Yan!
+    <div id="bind-attribute">
+        {{ message }}
+        <span>Hover your mouse over me for a few seconds to see my dynamically bound title!</span>
+    </div>
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-panel">
+                <div style="padding: 30px;">一个面板</div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-panel">
+                <div style="padding: 30px;">一个面板</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    //<![CDATA[
+    const app = new Vue({
+        el: "#app",
+        data() {
+            return {
+                message: 'You loaded this page on ' + new Date().toLocaleString()
+            }
+        }
+    });
+    //]]>
+</script>
+</body>
+</html>

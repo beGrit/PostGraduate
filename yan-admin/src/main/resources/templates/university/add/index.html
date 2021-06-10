@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="x-body">
-    <form class="layui-form">
+    <form class="layui-form" id="add-university-form">
         <!--表单内容区域-->
         <div class="layui-inline">
             <label class="layui-form-label">院校ID</label>
@@ -30,6 +30,20 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">排名</label>
+            <div class="layui-input-block">
+                <input type="text" name="rank" required lay-verify="required" placeholder="请输入综合排名"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">LOGO地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="iconPath" required lay-verify="required" placeholder="请输入院校Logo地址"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">官方网址</label>
             <div class="layui-input-block">
                 <input type="text" name="officialUrl" required lay-verify="required" placeholder="请输入院校官方网址"
@@ -39,14 +53,18 @@
         <div class="layui-form-item">
             <label class="layui-form-label">复选框</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="isYJSY" title="是否是研究生院" checked>
-                <input type="checkbox" name="isZHX" title="是否是自划线">
-                <input type="checkbox" name="isJBW" title="是否是985院校">
-                <input type="checkbox" name="isEYY" title="是否是211院校">
+                <input type="checkbox" name="isYJSY" title="是否是研究生院" value="1" checked>
+                <input type="checkbox" name="isZHX" title="是否是自划线" value="1">
+                <input type="checkbox" name="isJBW" title="是否是985院校" value="1">
+                <input type="checkbox" name="isEYY" title="是否是211院校" value="1">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">位置信息</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="locationId" placeholder="位置ID°" autocomplete="off" class="layui-input">
+            </div>
+            -
             <div class="layui-input-inline" style="width: 100px;">
                 <input type="text" name="longitude" placeholder="经度°" autocomplete="off" class="layui-input">
             </div>
@@ -59,12 +77,11 @@
             <label class="layui-form-label">所属城市</label>
             <div class="layui-input-block">
                 <!--发送网络请求,动态渲染-->
-                <select name="city" lay-verify="required">
-                    <option value="0">北京</option>
-                    <option value="1">上海</option>
-                    <option value="2">广州</option>
-                    <option value="3">深圳</option>
-                    <option value="4">杭州</option>
+                <select id="cityList" name="cityId" lay-verify="required">
+                    <option value="3">北京</option>
+                    <option value="4">广州</option>
+                    <option value="2">成都</option>
+                    <option value="1">杭州</option>
                 </select>
             </div>
         </div>
@@ -83,12 +100,14 @@
 
         formElement.addEventListener("submit", evt => {
             evt.preventDefault();
+
             const formData = new FormData(formElement);
             let data = {};
             formData.forEach((value, key) => data[key] = value);
-            console.log(data);
-            const url = "/api/v2.1/university/one";
 
+            console.log(data);
+
+            const url = "/api/v2.1/university/one";
             fetch(url, {
                 method: "POST",
                 headers: {
@@ -100,6 +119,23 @@
             });
         })
 
+
+        let cityListDom = formElement.querySelector("#cityList");
+        fetch("/api/v2.1/city/list")
+            .then(resp => {
+                return resp.json();
+            })
+            .then(json => {
+                return json.data;
+            })
+            .then(data => {
+                for (let item of data) {
+                    let newOption = document.createElement("option");
+                    newOption.value = item.id;
+                    newOption.textContent = item.name;
+                    cityListDom.appendChild(newOption);
+                }
+            })
     }
 </script>
 </body>

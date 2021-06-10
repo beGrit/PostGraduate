@@ -3,8 +3,8 @@ package org.yan.admin.advice;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yan.admin.exception.basic.CrudException;
 import org.yan.common.api.CommonResult;
+import org.yan.common.exception.basic.CrudException;
 
 @ControllerAdvice(basePackages = "org.yan.admin.api")
 @ResponseBody

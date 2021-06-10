@@ -31,6 +31,17 @@ public class Announcement {
      */
     private AttachmentType attachmentType;
 
+    public Announcement() {
+    }
+
+    public Announcement(Long id, String title, Date publishTime, String attachmentPath, AttachmentType attachmentType) {
+        this.id = id;
+        this.title = title;
+        this.publishTime = publishTime;
+        this.attachmentPath = attachmentPath;
+        this.attachmentType = attachmentType;
+    }
+
     public Long getId() {
         return id;
     }

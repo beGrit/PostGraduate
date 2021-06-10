@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Major</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="/static/css/university.css">
+
+  <link rel="stylesheet" href="/static/css/font.css">
+  <link rel="stylesheet" href="/static/css/xadmin.css">
+  <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/static/js/xadmin.js"></script>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+<div class="x-body">
+  <form class="layui-form" id="add-university-form">
+    <!--表单内容区域-->
+    <div class="layui-inline">
+      <label class="layui-form-label">专业ID</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input type="text" name="id" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">专业名</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" required lay-verify="required" placeholder="请输入专业名" autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">专业代码</label>
+      <div class="layui-input-block">
+        <input type="text" name="code" required lay-verify="required" placeholder="请输入专业代码"
+               autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">简介描述</label>
+      <div class="layui-input-block">
+        <input type="text" name="description" required lay-verify="required" placeholder="请输入简介描述"
+               autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="formDemo" @click="addOneUniversity">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  window.onload = function () {
+
+    let formElement = document.querySelector("form");
+
+    formElement.addEventListener("submit", evt => {
+      evt.preventDefault();
+
+      const formData = new FormData(formElement);
+      let data = {};
+      formData.forEach((value, key) => data[key] = value);
+
+      console.log(data);
+
+      const url = "/api/v2.1/major/one";
+      fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(resp => {
+        console.log(resp.json())
+      })
+      .then(json => {
+        if (json.code === 200) {
+          alert("添加成功");
+        }
+      });
+
+    });
+  }
+</script>
+</body>
+</html>

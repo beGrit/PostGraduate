@@ -37,12 +37,12 @@
     </div>
     <!--按钮区 + 元数据meta区-->
     <xblock>
-        <button class="layui-btn layui-btn-danger" @click="deleteByIdList(idList)"><i class="layui-icon"></i>批量删除
+<!--        <button class="layui-btn layui-btn-danger" @click="deleteByIdList(idList)"><i class="layui-icon"></i>批量删除
         </button>
         <button class="layui-btn"
                 onclick="x_admin_show('Add_Book','/admin/university/addView')"><i
                 class="layui-icon"></i>添加
-        </button>
+        </button>-->
         <span class="x-right" style="line-height:40px">共有数据：{{ this.pageBar.totalRecords }} 条</span>
     </xblock>
     <table class="layui-table">
@@ -54,6 +54,7 @@
                 </div>
             </th>
             <th v-for="th in ths">{{ th }}</th>
+            <th>修改</th>
         </tr>
         </thead>
         <tbody>
@@ -66,6 +67,11 @@
             <td>{{ item.id }}</td>
             <td>{{ item.longitude }}</td>
             <td>{{ item.latitude }}</td>
+            <td>
+                <button class="layui-btn layui-btn-warm">
+                    修改
+                </button>
+            </td>
         </tr>
         <div v-else>
             暂无数据

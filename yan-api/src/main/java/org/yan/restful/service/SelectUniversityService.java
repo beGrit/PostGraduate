@@ -1,6 +1,7 @@
 package org.yan.restful.service;
 
-import org.yan.admin.exception.basic.CrudException;
+
+import org.yan.common.exception.basic.CrudException;
 
 import java.util.List;
 

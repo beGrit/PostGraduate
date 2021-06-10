@@ -17,6 +17,11 @@ public class University {
     private String name;
 
     /**
+     * 院校全国排名
+     */
+    private int rank;
+
+    /**
      * 是否为研究生院校 (0 不是, 1 是)
      */
     private int isYJSY;
@@ -27,11 +32,6 @@ public class University {
     private int isZHX;
 
     /**
-     * 院校全国排名
-     */
-    private int rank;
-
-    /**
      * 是否是985院校
      */
     private int isJBW;
@@ -40,6 +40,11 @@ public class University {
      * 是否是211院校
      */
     private int isEYY;
+
+    /**
+     * icon路径
+     */
+    private String iconPath;
 
     /**
      * 官方网站地址
@@ -53,7 +58,7 @@ public class University {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 

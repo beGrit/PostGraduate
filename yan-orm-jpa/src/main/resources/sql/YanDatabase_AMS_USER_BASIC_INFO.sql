@@ -12,4 +12,4 @@ create table AMS_USER_BASIC_INFO
 create index FK9bujloynfm7slpcr2uta2u2yq
     on AMS_USER_BASIC_INFO (master_major_id);
 
-INSERT INTO YanDatabase.AMS_USER_BASIC_INFO (DTYPE, id, avatarPath, nickName, master_major_id) VALUES ('UserDetailInfo', 1, '/image/pocky.png', 'pocky1314', 1);
+INSERT INTO YanDatabase.AMS_USER_BASIC_INFO (DTYPE, id, avatarPath, nickName, master_major_id) VALUES ('UserDetailInfo', 1, '/image/pocky.jpg', 'pocky1314', 1);

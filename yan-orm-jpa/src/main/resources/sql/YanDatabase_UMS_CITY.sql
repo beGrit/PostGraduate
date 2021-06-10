@@ -10,3 +10,5 @@ create table UMS_CITY
 
 INSERT INTO YanDatabase.UMS_CITY (id, name) VALUES (1, '杭州');
 INSERT INTO YanDatabase.UMS_CITY (id, name) VALUES (2, '成都');
+INSERT INTO YanDatabase.UMS_CITY (id, name) VALUES (3, '北京');
+INSERT INTO YanDatabase.UMS_CITY (id, name) VALUES (4, '广州');

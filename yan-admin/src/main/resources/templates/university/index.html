@@ -55,6 +55,7 @@
             </th>
             <th v-for="th in ths">{{ th }}</th>
             <th>详情</th>
+            <th>修改</th>
         </tr>
         </thead>
         <tbody>
@@ -72,6 +73,11 @@
                 <button class="layui-btn"
                         onclick="x_admin_show('查看详情','/admin/university/detailView')">
                     查看详情
+                </button>
+            </td>
+            <td>
+                <button class="layui-btn layui-btn-warm">
+                    修改
                 </button>
             </td>
         </tr>

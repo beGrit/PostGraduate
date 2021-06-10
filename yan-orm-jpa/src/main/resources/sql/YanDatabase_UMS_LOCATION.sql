@@ -9,4 +9,7 @@ create table UMS_LOCATION
 
 INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (2, 2, 3);
 INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (3, 3, 3);
-INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (8, 11, 2);
+INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (8, 108.918798, 34.233838);
+INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (1, 66, 77);
+INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (4, 99, 99);
+INSERT INTO YanDatabase.UMS_LOCATION (id, latitude, longitude) VALUES (5, 100, 99);

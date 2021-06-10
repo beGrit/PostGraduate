@@ -16,7 +16,6 @@
         <module>yan-orm-mybatis</module>
         <module>yan-api</module>
         <module>yan-security</module>
-        <module>yan-swagger</module>
     </modules>
 
     <parent>

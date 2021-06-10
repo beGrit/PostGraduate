@@ -24,6 +24,7 @@ public class UserInfoIndexController {
         if (raw != null) {
             userId = Long.parseLong((String) raw);
         }
+        session.setAttribute("userId", userId);
         UserDetailInfo detailInfo = service.getDetail(userId);
         return CommonResult.success(detailInfo);
     }

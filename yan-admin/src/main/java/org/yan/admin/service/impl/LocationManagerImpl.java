@@ -7,10 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import org.yan.admin.service.LocationManager;
-import org.yan.admin.service.UniversityManager;
-import org.yan.common.domain.page.PageParam;
+import org.yan.admin.service.manager.LocationManager;
+import org.yan.admin.service.manager.UniversityManager;
 import org.yan.common.exception.basic.DeleteException;
 import org.yan.common.exception.basic.QueryException;
 import org.yan.common.exception.basic.UpdateException;
@@ -69,9 +67,7 @@ public class LocationManagerImpl implements LocationManager {
     }
 
     @Override
-    public List<Location> queryByPage(PageParam pageParam) throws QueryException {
-        int pageIndex = pageParam.getPageIndex();
-        int pageSize = pageParam.getPageSize();
+    public List<Location> queryByPage(Integer pageIndex, Integer pageSize) throws QueryException {
         Page<Location> rtn = locationRepository.findAll(PageRequest.of(pageIndex - 1, pageSize));
         if (rtn.getNumberOfElements() == 0) {
             throw new QueryException("数据集为空");

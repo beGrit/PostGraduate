@@ -8,7 +8,6 @@ import javax.persistence.*;
 public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -19,7 +18,7 @@ public class Location {
     /**
      * 纬度
      */
-        private Double latitude;
+    private Double latitude;
 
     @OneToOne(mappedBy = "location", fetch = FetchType.LAZY)
     private University university;

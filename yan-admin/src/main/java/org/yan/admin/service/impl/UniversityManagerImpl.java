@@ -1,15 +1,20 @@
 package org.yan.admin.service.impl;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.TypeCheckError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.yan.admin.exception.basic.CrudException;
-import org.yan.admin.exception.basic.QueryException;
-import org.yan.admin.service.LocationManager;
-import org.yan.admin.service.UniversityManager;
+
+import org.yan.admin.service.manager.CityManager;
+import org.yan.admin.service.manager.LocationManager;
+import org.yan.admin.service.manager.UniversityManager;
+
+import org.yan.common.exception.basic.CrudException;
 import org.yan.common.exception.basic.DeleteException;
+import org.yan.common.exception.basic.QueryException;
+import org.yan.persistence.entity.university.City;
 import org.yan.persistence.entity.university.Location;
 import org.yan.persistence.entity.university.University;
 import org.yan.persistence.repository.LocationRepository;
@@ -31,6 +36,9 @@ public class UniversityManagerImpl implements UniversityManager {
     @Autowired
     LocationManager locationManager;
 
+    @Autowired
+    CityManager cityManager;
+
     public boolean isLocationUsed(Long locationId) {
         boolean b = universityRepository.existsUniversityByLocation_Id(locationId);
         return b;
@@ -39,6 +47,18 @@ public class UniversityManagerImpl implements UniversityManager {
     @Override
     public Long getTotal() {
         return universityRepository.countDistinctByIdNotNull();
+    }
+
+    @Override
+    @Transactional
+    public void add(Object b) throws CrudException {
+        University newUniversity = (University) b;
+
+        /*添加location*/
+        Location location = newUniversity.getLocation();
+        Location newLocation = locationManager.save(location);
+
+        universityRepository.save(newUniversity);
     }
 
     @Override
@@ -61,6 +81,17 @@ public class UniversityManagerImpl implements UniversityManager {
     }
 
     @Override
+    @Transactional
+    public void save(Object b) throws CrudException {
+        University university = (University) b;
+        try {
+            universityRepository.save(university);
+        } catch (Exception e) {
+            throw new CrudException();
+        }
+    }
+
+    @Override
     public List<University> queryByIdList(Long[] idList) throws QueryException {
         List<University> universityList = new ArrayList<>();
         for (int i = 0; i < idList.length; i++) {
@@ -68,6 +99,13 @@ public class UniversityManagerImpl implements UniversityManager {
             universityList.add(university);
         }
         return universityList;
+    }
+
+    @Override
+    public void save(University university, Long cityId) throws CrudException {
+        City city = cityManager.queryById(cityId);
+        university.setCity(city);
+        this.save(university);
     }
 
     public University queryById(Long uid) throws QueryException {
