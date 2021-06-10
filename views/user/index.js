@@ -18,6 +18,7 @@ window.onload = function () {
         })
         .then(data => {
             userInfo.render(data);
+            localStorage.setItem("userInfo", data);
         })
         .catch(reason => {
             let json = reason.message;

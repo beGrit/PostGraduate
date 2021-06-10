@@ -1,16 +1,17 @@
 import {Component} from "/js/base.js";
-import {fetchUniversityByIds} from "/js/adminAPI.js";
 import {initChart} from "/js/grades-compare.js";
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
 import {HeaderPostComponent} from "/views/compare/show/components/HeaderPost/index.js";
+import {fetchUserConcernedUniversities} from "/js/restfulApi.js";
 
 window.onload = function () {
 
     function initialData(id1, id2) {
-        let fetchPromise = fetchUniversityByIds(id1, id2);
+        let fetchPromise = fetchUserConcernedUniversities();
         fetchPromise.then(response => response.json())
             .then(json => json["data"])
             .then(data => {
+                console.log(data)
                 c1.render(data);
                 let universities = [];
                 for (let k = 0; k < data.length; k++) {

@@ -1,9 +1,14 @@
+#app {
+    width: 375px;
+    margin-top: 45px;
+}
+
 .outer {
     width: 100%;
     min-height: 200px;
 }
 
-.container {
+.content-container {
     display: block;
     width: 100%;
 }
@@ -16,3 +21,28 @@
     margin: 10px auto 0;
 }
 
+.section-box {
+    border: 1px solid #00a65a;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px #ddd;
+    background: #fff;
+}
+
+#major_box {
+    margin-top: 20px;
+    min-height: 200px;
+    max-height: 300px;
+}
+
+.major-box-name {
+    margin: 20px auto 0;
+    width: 80%;
+    text-align: center;
+}
+
+.major-box-description {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}

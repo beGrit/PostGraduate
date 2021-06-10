@@ -1,6 +1,12 @@
+img {
+    width: 100%;
+    height: 100%;
+}
+
 .bottom-nav {
     width: 350px;
     height: 50px;
+    background-color: whitesmoke;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -18,13 +24,23 @@
 
 .bottom-nav-item,
 .bottom-nav-item--selected {
+    height: 50px;
+    width: 50px;
     border: 1px;
     border-radius: 100%;
-    padding: 5px;
+    /*padding: 5px;*/
 }
 
-.bottom-nav-item,
-.bottom-nav-item--selected > a {
+.bottom-nav-item a {
+    height: 50px;
+    width: 50px;
+    text-decoration: none;
+}
+
+.bottom-nav-item--selected a {
+    box-sizing: border-box;
+    height: 50px;
+    width: 50px;
     text-decoration: none;
 }
 

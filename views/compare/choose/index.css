@@ -14,6 +14,8 @@ div {
 
 #main-div {
     height: 650px;
+    width: 375px;
+    margin-top: 45px;
 }
 
 #banner {
@@ -125,7 +127,7 @@ img {
 }
 
 .item-remove-icon-wrapper {
-    background-color: #1AA093;
+    /*background-color: #1AA093;*/
     border-radius: 50px;
 }
 

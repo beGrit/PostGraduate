@@ -27,7 +27,6 @@ class TopNavBarComponent extends HTMLElement {
         this.attachShadow({mode: 'open'});
         this.shadowRoot.append(template.content.cloneNode(true));
 
-
         this.backEntrance = this.shadowRoot.querySelector("#back-entrance");
         this.backEntrance.addEventListener("click", evt => {
             window.history.back(-1);

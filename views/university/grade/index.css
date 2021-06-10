@@ -1,0 +1,23 @@
+#app {
+    width: 375px;
+    margin-top: 45px;
+}
+
+.grade-chart-outer {
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section-box {
+    border: 1px solid #00a65a;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px #ddd;
+    background: #fff;
+}
+
+.grade-chart-container {
+    width: 100%;
+    height: 90%;
+}

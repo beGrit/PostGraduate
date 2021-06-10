@@ -6,20 +6,20 @@ template.innerHTML = `
 <link href="/components/BottomNav/index.css" rel="stylesheet"/>
 <div id="bottom-nav" class="bottom-nav">
     <div class="bottom-nav-item--selected">
-        <a href="/views/home/index.html">首页</a>
+        <a href="/views/home/index.html"><img src="/image/icons/首页.png"></a>
     </div>
     <div class="bottom-nav-item">
-        <a href="/views/university/index.html">院校</a>
+        <a href="/views/university/index.html"><img src="/image/icons/管理.png"></a>
     </div>
     <div class="bottom-nav-item">
-        <a href="/views/major/index.html">专业</a>
+        <a href="/views/major/index.html"><img src="/image/icons/资料.png"></a>
     </div>
     <div class="bottom-nav-item">
-        <a href="/views/user/index.html">个人</a>
+        <a href="/views/user/index.html"><img src="/image/icons/我的.png"></a>
     </div>
-    <div class="bottom-nav-item">
+<!--    <div class="bottom-nav-item">
         <a href="/views/compare/choose/index.html">比较</a>
-    </div>
+    </div>-->
 </div>`;
 
 class BottomNavComponent extends HTMLElement {

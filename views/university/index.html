@@ -5,12 +5,91 @@
     <title>University</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <script charset="utf-8" src="https://webapi.amap.com/maps?v=1.4.15&key=4b329cf49e6598c25d1cf6a9ca835514"></script>
 </head>
 <body>
 <!--顶部导航栏-->
 <top-nav-bar-component title="院校"></top-nav-bar-component>
 
 <div id="app">
+    <header>
+        <div id="university_box" class="section-box">
+            <div id="share_msg">
+                <div id="grade_box">
+                    <div id="grade" class="icon-item">
+                        <img src="/image/icons/grade.png"/>
+                    </div>
+                    <span>分数线</span>
+                </div>
+                <div>
+                    <div id="blb_box" class="icon-item">
+                        <img src="/image/icons/chart.png"/>
+                    </div>
+                    <span>报录比</span>
+                </div>
+                <div>
+                    <div id="ex_box" class="icon-item">
+                        <img src="/image/icons/experience.png"/>
+                    </div>
+                    <span>备考经验</span>
+                </div>
+                <div>
+                    <div id="compare_box" class="icon-item">
+                        <img src="/image/icons/compare.png"/>
+                    </div>
+                    <span>院校比较</span>
+                </div>
+            </div>
+            <div id="university_img">
+                <div id="university_msg">
+                    <div id="university_name"><h3><!--北京大学--></h3></div>
+                    <select name="universities" id="university_names">
+                    </select>
+                    <div id="university_professional"><h4>软件工程</h4></div>
+                </div>
+                <div id="university_nature">
+                    <p>
+<!--                        <span>985</span>
+                        <span>211</span>
+                        <span>自主划线</span>
+                        <span>综合排名 1</span>-->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div id="gaode-map-container" class="section-box">
+            <!--            <h2>地理位置</h2>
+                        <iframe src="https://wwwz.baidu.com/?tn=88093251_34_hao_pg" frameborder="0"></iframe>-->
+        </div>
+        <div id="college_counseling_box" class="section-box">
+            <h3 style="margin-left: 20px">院校资讯</h3>
+            <div id="College_counseling">
+                <div class="items-container">
+                    <div class="usage-item-outer">
+                        <span>招生信息</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>招生简章</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>专业目录</span>
+                    </div>
+
+                    <div class="usage-item-outer">
+                        <span>通知公告</span>
+                    </div>
+
+                    <div class="usage-item-outer" id="grade-item">
+                        <span>分数线</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="outer">
         <section class="container">
             <button id="select-button" class="select-button btn">
@@ -18,8 +97,8 @@
                     <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
                 </svg>
                 <br>
-                选择院校
-            </button>
+                切换院校
+            </button>k
         </section>
     </div>
 </div>
