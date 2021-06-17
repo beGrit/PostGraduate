@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>位置管理</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/css/university.css">
+
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+           href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <!--检索区域-->
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <input class="layui-input" placeholder="开始日" name="start" id="start">
+            <input class="layui-input" placeholder="截止日" name="end" id="end">
+            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <!--按钮区 + 元数据meta区-->
+    <xblock>
+        <!--        <button class="layui-btn layui-btn-danger" @click="deleteByIdList(idList)"><i class="layui-icon"></i>批量删除
+                </button>
+                <button class="layui-btn"
+                        onclick="x_admin_show('Add_Book','/admin/university/addView')"><i
+                        class="layui-icon"></i>添加
+                </button>-->
+        <span class="x-right" style="line-height:40px">共有数据：{{ this.pageBar.totalRecords }} 条</span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div>
+                    <input type="checkbox" :input="checkAll(isAllChecked)" :value="isAllChecked">
+                </div>
+            </th>
+            <th v-for="th in ths">{{ th }}</th>
+            <th>详情</th>
+            <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) in data" v-if="data != null && data.length != 0">
+            <td>
+                <div>
+                    <input type="checkbox" name="idList" @click="updateIdList(item.id,$event)">
+                </div>
+            </td>
+            <td>
+                {{ item.id }}
+            </td>
+            <td>
+                {{ item.average }}
+            </td>
+            <td>
+                {{ item.maxGrade }}
+            </td>
+            <td>
+                {{ item.minGrade }}
+            </td>
+            <td>
+                <button class="layui-btn"
+                        onclick="x_admin_show('查看详情','/admin/university/detailView')">
+                    查看详情
+                </button>
+            </td>
+            <td>
+                <button class="layui-btn layui-btn-warm">
+                    修改
+                </button>
+            </td>
+        </tr>
+        <div v-else>
+            暂无数据
+        </div>
+        </tbody>
+    </table>
+    <div :class="detailModalClass">
+        <div>
+            <!--数据区-->
+            <div v-if="curItem != null">
+                <div>
+                    <label>{{ cols[0] }}</label>
+                    <p>{{ curItem.id }}</p>
+                </div>
+                <div>
+                    <label>{{ cols[1] }}</label>
+                    <p>{{ curItem.name }}</p>
+                </div>
+            </div>
+            <div v-else>
+                未选中数据 😢
+            </div>
+            <!--按钮区-->
+            <div>
+                <button @click="hideDetail">关闭</button>
+                <!--                <button @click="modified(curItem)">保存</button>-->
+            </div>
+        </div>
+    </div>
+    <!--分页条-->
+    <div class="page">
+        <div>
+            <!--上一页-->
+            <a class="prev" href="#"
+               @click="fetchUniversityPage(pageBar.prePageIndex, 5)" :style="">&lt;&lt;</a>
+            <!--显示的分页索引-->
+            <div style="display: inline" v-for="item in pageBar.declaredIndexList">
+                <a v-if="item != pageBar.curPageIndex"
+                   href="#"
+                   @click="fetchUniversityPage(item, 5)">
+                    {{ item }}
+                </a>
+                <span v-if="item == pageBar.curPageIndex" class="current">
+                    {{ item }}
+                </span>
+            </div>
+            <!--下一页-->
+            <a class="next" href="#"
+               @click="fetchPage(pageBar.nextPageIndex, 5)" :disabled="pageBar.curPageIndex == 1">&gt;&gt;</a>
+        </div>
+    </div>
+</div>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                count: 100,
+                cols: ['主键', '平均分', '最高分', '最低分', '报考人数', '年份'],
+                curPageIndex: 1,
+                pageSize: 3,
+                pageBar: {},
+                data: [],
+                index: 0,
+                curItem: {},
+                flag: false,
+                detailModalClass: {
+                    "modal-hide": true,
+                    "modal-show": false,
+                },
+                isAllChecked: false,
+            }
+        },
+        computed: {
+            ths: function () {
+                return this.cols.slice(0, 4)
+            },
+
+            idList: function () {
+                return new Set([]);
+            },
+
+            count: function () {
+                return this.pageBar.totalRecords;
+            }
+        },
+        watch: {},
+        methods: {
+            // to backend methods (网络请求区)
+            fetchPage(pageIndex, pageSize) {
+                $.ajax({
+                    url: '/api/v2.1/grade/page?' + "pageIndex=" + pageIndex + "&" + "pageSize=" + pageSize,
+                    type: 'GET',
+                    dataType: 'json',
+                    timeout: 1000,
+                    cache: false,
+                    beforeSend: () => {
+                        // $("#list3").html('加载中...');
+                    }, //加载执行方法
+                    error: () => {
+                        alert("error");
+                    },  //错误执行方法
+                    success: (text) => {
+                        let json = eval(text); //数组
+                        text = "";
+                        this.data = json.data.pageContentInfo.data;
+                        this.pageBar = json.data.pageBar;
+                        this.curPageIndex = this.pageBar.curPageIndex;
+                    }
+                })
+
+                function LoadFunction1() {
+                    // $("#list3").html('加载中...');
+                }
+
+                function erryFunction1() {
+                    alert("error");
+                }
+            },
+
+            showDetail: function (item) {
+                this.curItem = item;
+                this.detailModalClass["modal-show"] = true;
+                this.detailModalClass["modal-hide"] = false;
+            },
+            hideDetail: function () {
+                this.curItem = null;
+                this.detailModalClass["modal-show"] = false;
+                this.detailModalClass["modal-hide"] = true;
+            },
+
+            checkAll(isAllChecked) {
+                console.log(isAllChecked);
+            },
+
+            updateIdList(id, event) {
+                // event.preventDefault();
+                const checkbox = event.target;
+                if (checkbox.checked) {
+                    // 添加元素
+                    this.idList.add(id)
+                    console.log("添加元素" + id);
+                    console.log(this.idList);
+                } else {
+                    // 删除元素
+                    this.idList.delete(id);
+                    console.log("删除元素" + id);
+                    console.log(this.idList);
+                }
+            },
+            deleteByIdList(idList) {
+                if (idList.size === 0) {
+                    alert("未选中任何数据");
+                    return;
+                }
+                $.ajax({
+                    url: '/api/v2.1/location/list',
+                    type: 'DELETE',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    timeout: 1000,
+                    cache: false,
+                    data: JSON.stringify([...idList]),
+                    beforeSend: LoadFunction1, //加载执行方法
+                    error: erryFunction1,  //错误执行方法
+                    success: (text) => {
+                        let json = eval(text); //数组
+                        text = "";
+                        // 删除成功后的操作
+                        alert("删除成功");
+                        console.log(json);
+                        this.fetchPage(this.curPageIndex, this.pageSize);
+                    }
+                })
+
+            },
+        },
+        created: function () {
+            this.fetchPage(1, 5);
+        },
+        mounted: function () {
+
+        }
+    });
+</script>
+</body>
+</html>

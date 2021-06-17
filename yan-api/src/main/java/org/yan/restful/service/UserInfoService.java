@@ -14,5 +14,7 @@ public interface UserInfoService {
 
     MasterMajor getConcernedMasterMajor(Long id);
 
-    void changeConcernedMasterMajo(Long userId, Long mid) throws CrudException;
+    void changeConcernedMasterMajor(Long userId, Long mid) throws CrudException;
+
+    void changeConcernedUniversity(Long userId, Long newUid, Long oldUid) throws CrudException;
 }

@@ -26,4 +26,10 @@ class UniversityOpenMasterMajorRepositoryTest {
     @Test
     void findByUniversity_IdAndMasterMajor_Id() {
     }
+
+    @Test
+    void findAllByMasterMajorId() {
+        List<UniversityOpenMasterMajor> allByMasterMajorId = repository.findAllByMasterMajorId(1L);
+        System.out.println(allByMasterMajorId);
+    }
 }

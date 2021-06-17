@@ -35,6 +35,10 @@ public class UniversityOpenMasterMajor { // 院校开放专业
             @JoinColumn(name = "mater_major_id")}, inverseJoinColumns = {@JoinColumn(name = "grade_id")})
     private List<Grade> grades;
 
+    public University getUniversity() {
+        return this.university;
+    }
+
     public List<Grade> getGrades() {
         return grades;
     }
