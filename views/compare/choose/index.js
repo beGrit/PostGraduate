@@ -1,6 +1,44 @@
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
+import {fetchUserConcernedMasterMajor, fetchUserConcernedUniversities} from "/js/restfulApi.js";
+
+let template =
+    `<template id="unSelected-button">
+        <div class="university-item-outer">
+            <button class="unSelected-button">
+                <img src="imgs/unSelected.png">
+            </button>
+        </div>
+    </template>`;
 
 window.onload = function () {
+    const universityPromise = fetchUserConcernedUniversities();
+    const majorPromise = fetchUserConcernedMasterMajor();
+    universityPromise
+        .then(resp => {
+            return resp.json();
+        })
+        .then(json => {
+            if (json.code === 200) {
+                return json.data;
+            }
+        })
+        .then(data => {
+            container.renderUniversityList(data);
+        })
+
+    majorPromise
+        .then(resp => {
+            return resp.json();
+        })
+        .then(json => {
+            if (json.code === 200) {
+                return json.data;
+            }
+        })
+        .then(data => {
+            container.renderMajor(data);
+        })
+
     class UniversityItem {
         constructor(id) {
             this.root = document.querySelector("#" + id);
@@ -44,6 +82,21 @@ window.onload = function () {
         }
     }
 
+    class Container {
+        constructor() {
+
+        }
+
+        renderMajor(data) {
+            console.log(data)
+        }
+
+        renderUniversityList(data) {
+            console.log(data)
+        }
+    }
+
+
     let itemModelList = [];
     for (let i = 1; i < 4; i++) { // 创建对象数组
         itemModelList.push(new UniversityItem("item-" + i));
@@ -63,4 +116,6 @@ window.onload = function () {
         evt.preventDefault();
         window.location.href = "/views/compare/show/index.html";
     });
+
+    const container = new Container();
 }

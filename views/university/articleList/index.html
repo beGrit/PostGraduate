@@ -2,20 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>News Detail</title>
+    <title>Article List</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <!--顶部导航栏-->
-<top-nav-bar-component title="新闻详情"></top-nav-bar-component>
+<top-nav-bar-component title="院校资讯"></top-nav-bar-component>
 <div id="app">
-    <div class="section-box header-container">
-    </div>
-    <div class="section-box content-container">
-        <article></article>
-    </div>
+    <article-nav-component></article-nav-component>
+    <div id="item-list" class="article-item-list"></div>
 </div>
 <script src="index.js" type="module"></script>
 </body>

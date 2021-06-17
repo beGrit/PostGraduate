@@ -16,18 +16,6 @@ window.onload = function () {
             universityInfo.initial(data);
         });
 
-    // 第三方库区
-    function initMap(location) {
-        let longitude = location.longitude;
-        let latitude = location.latitude;
-        const map = new AMap.Map('gaode-map-container', {
-            resizeEnable: true,
-            center: [longitude, latitude],
-            zoom: 13,
-        });
-    }
-
-
     // 数据处理区
     class UniversityInfo {
         constructor() {
@@ -43,6 +31,8 @@ window.onload = function () {
             let data = dataList[0];
 
             this.renderContent(data);
+
+            this.renderLocation(data.location)
         }
 
         renderSelect(dataList) {
@@ -65,7 +55,6 @@ window.onload = function () {
                 newOption.appendChild(newH3);
                 universityNames.appendChild(newOption);
             }
-
         }
 
         renderContent(data) {
@@ -80,9 +69,6 @@ window.onload = function () {
             });
 
             // 渲染
-            curUname.textContent = data['name'];
-
-
             if (data["isJBW"] !== undefined && data["isJBW"] === 1) {
                 const spanItem = document.createElement("span");
                 spanItem.textContent = "985 ";
@@ -106,9 +92,14 @@ window.onload = function () {
                 spanItem.textContent = "自划线 ";
                 basicInfo1.appendChild(spanItem);
             }
+        }
 
-            console.log(data['location'])
-            // initMap(data["location"])
+        renderLocation(location) {
+            console.log(location)
+            var map = new AMap.Map('map-container', {
+                center: [104.148339, 30.676023],
+                zoom: 11
+            });
         }
     }
 
@@ -132,8 +123,10 @@ window.onload = function () {
         window.location.href = "/views/compare/choose";
     });
 
+
     const gradeElm = document.querySelector("#grade-item");
     const gradeBox = document.querySelector("#grade_box");
+    const exBox = document.querySelector("#ex_box");
 
     gradeElm.addEventListener("click", evt => {
         window.location.href = "/views/university/grade/index.html?" + "uid=" + universityInfo.uid + "&" + "mid=" + "1";
@@ -141,4 +134,9 @@ window.onload = function () {
     gradeBox.addEventListener("click", evt => {
         window.location.href = "/views/university/grade/index.html?" + "uid=" + universityInfo.uid + "&" + "mid=" + "1";
     });
+
+    exBox.addEventListener("click", evt => {
+        console.log('备考经验')
+        window.location.href = "/views/university/ex/index.html?" + "uid=" + universityInfo.uid + "&" + "mid=" + "1";
+    })
 }

@@ -21,7 +21,6 @@ window.onload = function () {
                     "id": 5,
                     "name": "清华大学"
                 }
-
             ],
         },
         {
@@ -39,6 +38,13 @@ window.onload = function () {
                     "name": "广东师范大学"
                 }
             ],
+        },
+        {
+            "city": {
+                "id": 1,
+                "name": "杭州",
+            },
+            "universities": []
         }
     ]
 
@@ -103,6 +109,4 @@ window.onload = function () {
     const container = new UniversityCollection();
 
     initialData();
-
-    // customElements.define("top-nav-bar-component", TopNavBarComponent);
 }

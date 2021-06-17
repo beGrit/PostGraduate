@@ -1,0 +1,10 @@
+#app {
+    width: 375px;
+    margin-top: 45px;
+}
+
+.article-item-list {
+    width: 95%;
+    margin: 0 auto;
+}
+

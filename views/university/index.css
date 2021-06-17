@@ -1,3 +1,7 @@
+body {
+    background-color: #F1F3F4;
+}
+
 .outer {
     width: 100%;
     min-height: 200px;
@@ -78,6 +82,9 @@ body {
     float: left;
     color: #985f0d;
     margin-left: 20px;
+    border: 0;
+    height: 64px;
+    font-size: 20px;
 }
 
 #university_name {
@@ -137,7 +144,30 @@ body {
 #gaode-map-container {
     width: 95%;
     height: 300px;
-    border-top:1px black solid;
-    border-bottom:1px black solid;
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    margin: 25px auto 0;
+}
+
+
+#map {
+    height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map-container {
+    width: 100%;
+    height: 200px;
+}
+
+#map-box {
+    width: 95%;
     margin: 25px auto 0;
 }

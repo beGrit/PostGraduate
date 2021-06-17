@@ -1,0 +1,18 @@
+
+#app {
+    width: 375px;
+    margin-top: 45px;
+}
+
+
+.section-box {
+    border: 1px solid #00a65a;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px #ddd;
+    background: #fff;
+}
+
+.container {
+    text-align: center;
+    height: 200px;
+}

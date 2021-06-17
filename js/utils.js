@@ -9,3 +9,17 @@ export function getQueryVariable(variable) {
     }
     return (false);
 }
+
+
+export function readTextFile(path) {
+    const reader = new FileReader();
+    reader.readAsText(path);
+
+    let rtn = undefined;
+
+    reader.onload = function () {
+        rtn = this.result;
+    }
+
+    return rtn;
+}

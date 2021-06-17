@@ -31,36 +31,32 @@ class HeaderPostComponent extends HTMLElement {
         super();
         this.attachShadow({mode: 'open'});
         this.shadowRoot.append(template.content.cloneNode(true));
+
+        const resetBtn = this.shadowRoot.querySelector(".university-choice-button-wrapper");
+        console.log(resetBtn)
+        resetBtn.addEventListener("click", evt => {
+            window.history.back();
+        });
     }
 
     connectedCallback() {
         let data = this.data;
-        this.render(data);
+        this.render("软件工程", data);
     }
 
-    render(data) {
-        if (data === null || data === undefined) {
-            data = {
-                "m_name": "哲学",
-                "u_names": [
-                    "复旦大学", "北京大学"
-                ]
-            }
-        }
+    render(mname, unames) {
         const majorHeader = this.shadowRoot.querySelector(".major-name-wrapper h3");
         const uWrapper = this.shadowRoot.querySelector(".university-name-wrapper");
 
-        majorHeader.textContent = data['m_name']; // 渲染majorHeader
-        let length = data["u_names"].length;
+        majorHeader.textContent = mname; // 渲染majorHeader
+        let length = unames.length;
         for (let i = 0; i < length; i++) {
             const h3 = document.createElement("h3");
-            h3.textContent = data["u_names"][i];
+            h3.textContent = unames[i];
             uWrapper.appendChild(h3);
             if (i !== length - 1) {
                 uWrapper.appendChild(document.createTextNode("|"));
             }
-        }
-        for (let u_name of data["u_names"]) { // 渲染内容
         }
     }
 }

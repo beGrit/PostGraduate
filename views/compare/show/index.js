@@ -11,7 +11,6 @@ window.onload = function () {
         fetchPromise.then(response => response.json())
             .then(json => json["data"])
             .then(data => {
-                console.log(data)
                 c1.render(data);
                 let universities = [];
                 for (let k = 0; k < data.length; k++) {
@@ -20,6 +19,7 @@ window.onload = function () {
                 return universities;
             })
             .then(universities => {
+                detailHeader.data = universities;
                 c1.render(universities);
             })
             .catch(reason => {
@@ -27,7 +27,31 @@ window.onload = function () {
             });
     }
 
-    /*控制流抽象*/
+/*
+    class CompareDetailHeader extends Component {
+        constructor(id) {
+            super();
+            this.container = document.querySelector("#" + id);
+        }
+
+        registerPlugin(...plugins) {
+
+        }
+
+        render(data) {
+            const nameWrapper = this.container.querySelector(".university-name-wrapper");
+            const child1 = nameWrapper.firstElementChild;
+            const child2 = child1.nextElementSibling;
+            child1.textContent = data[0];
+            child2.textContent = data[1];
+        }
+    }
+
+    const c2 = new CompareDetailHeader("detail-header");
+*/
+
+
+    /*控件区*/
     class ContentController extends Component {
         constructor(id) {
             super();
@@ -71,31 +95,6 @@ window.onload = function () {
         }
     }
 
-    /*Header*/
-
-    /*
-        class CompareDetailHeader extends Component {
-            constructor(id) {
-                super();
-                this.container = document.querySelector("#" + id);
-            }
-
-            registerPlugin(...plugins) {
-
-            }
-
-            render(data) {
-                const nameWrapper = this.container.querySelector(".university-name-wrapper");
-                const child1 = nameWrapper.firstElementChild;
-                const child2 = child1.nextElementSibling;
-                child1.textContent = data[0];
-                child2.textContent = data[1];
-            }
-        }
-        const c2 = new CompareDetailHeader("detail-header");
-
-    */
-
     class PanelContainer extends Component {
         constructor() {
             super();
@@ -110,6 +109,8 @@ window.onload = function () {
             this.container.scrollLeft = targetPosition;
         }
     }
+
+    /*内容(面板)区*/
 
     /*综合比较面板*/
     class CompositeComparePanel extends Component {
@@ -262,7 +263,7 @@ window.onload = function () {
         ]
     }
     const detailHeader = document.querySelector("#detail-header");
-    detailHeader.data = data;
+
     // detailHeader.render();
 }
 

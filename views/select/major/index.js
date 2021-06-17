@@ -1,6 +1,19 @@
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
+import {fetchMasterMajorSelectList} from "/js/restfulApi.js";
 
 window.onload = function () {
+    const promise = fetchMasterMajorSelectList();
+    promise
+        .then(resp => {
+            return resp.json()
+        })
+        .then(json => {
+            return json.data;
+        })
+        .then(data => {
+            majorCollection.render2(data);
+        });
+
     let defaultData = [
         {
             "type": "学术硕士",
@@ -77,8 +90,16 @@ window.onload = function () {
             }
         }
 
+        render2(data) {
+            for (let item of data) {
+                const newLi = document.createElement("li");
+                newLi.textContent = item.name;
+                this.majorList.appendChild(newLi);
+            }
+        }
+
     }
 
     const majorCollection = new MajorCollection();
-    majorCollection.render(defaultData);
+    // majorCollection.render(defaultData);
 }

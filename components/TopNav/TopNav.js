@@ -15,7 +15,9 @@ template.innerHTML = `
     </div>
     <!--分享按钮--> <!--设计插槽-->
     <div class="top-nav__icon-wrapper">
-        <img src="/image/share.png">
+        <a href="/views/share/index.html">
+            <img src="/image/share.png">
+        </a>
     </div>
 </div>
 `

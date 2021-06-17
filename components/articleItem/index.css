@@ -1,0 +1,9 @@
+.article-item-outer {
+    margin-top: 10px;
+    border: 1px solid #00ca6d;
+}
+
+.article-content {
+    max-height: 100px;
+    overflow: hidden;
+}

@@ -18,5 +18,26 @@ window.onload = function () {
         })
         .then(data => {
             console.log(data);
+            render(data)
+        });
+
+    function render(data) {
+        const headerDom = document.querySelector(".header-container");
+        const contentDom = document.querySelector(".content-container > article");
+
+        headerDom.innerHTML = data.title + '<br>' + data.university.name + " - " + data.publishTime;
+
+        fetch(data.attachmentPath, {
+            headers: {
+                'Content-Type': "text/plain;charset=utf-8"
+            }
         })
+            .then(resp => {
+                return resp.text();
+            })
+            .then(text => {
+                contentDom.innerHTML = text;
+            });
+        // contentDom.textContent
+    }
 }
