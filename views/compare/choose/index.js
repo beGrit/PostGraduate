@@ -84,7 +84,7 @@ window.onload = function () {
 
     class Container {
         constructor() {
-
+            this.containerDom = document.querySelector("#university-items-div");
         }
 
         renderMajor(data) {
@@ -93,6 +93,36 @@ window.onload = function () {
 
         renderUniversityList(data) {
             console.log(data)
+            /*
+                let count = 0;
+                for (let item of data) {
+                    const template = document.createElement("template");
+
+                    template.innerHTML = `
+                    <div id="item-2" class="university-item--selected">
+                        <div class="university-item-outer">
+                            <div class="item-content-wrapper">
+                                <a class="item-remove" href="#">
+                                    <div class="item-remove-icon-wrapper">
+                                        <img src="imgs/close-bold.png" height="10" width="10">
+                                    </div>
+                                </a>
+                                <div class="item-content-img-wrapper">
+                                    <img src="/image/university_log/dzkjdx.jpeg" class="item-content-img">
+                                </div>
+                            </div>
+                            <p class="university-item__name">电子科技大学</p>
+                        </div>
+                    </div>
+                    `;
+                    const node = template.content.cloneNode(true);
+
+                    node.querySelector(".university-item--selected").id = "item-" + count;
+                    node.querySelector(".university-item__name").textContent = item.name;
+
+                    this.containerDom.appendChild(node);
+                }*/
+
         }
     }
 

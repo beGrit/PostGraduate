@@ -3,6 +3,7 @@ import {BottomNavComponent} from "/components/BottomNav/index.js";
 import {fetchUserDetailInfo} from "/js/restfulApi.js";
 
 window.onload = function () {
+
     const promise = fetchUserDetailInfo();
     promise
         .then(resp => {
@@ -26,6 +27,7 @@ window.onload = function () {
                 console.log(json.message);
             }
         });
+
 
     class UserInfo {
         constructor() {

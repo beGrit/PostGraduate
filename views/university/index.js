@@ -97,9 +97,13 @@ window.onload = function () {
         renderLocation(location) {
             console.log(location)
             var map = new AMap.Map('map-container', {
-                center: [104.148339, 30.676023],
-                zoom: 11
+                center: [location.latitude, location.longitude],
+                zoom: 13
             });
+            var marker = new AMap.Marker({
+                position:[location.latitude, location.longitude]//位置
+            })
+            map.add(marker);
         }
     }
 

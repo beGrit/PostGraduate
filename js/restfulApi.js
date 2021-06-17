@@ -64,7 +64,6 @@ export function fetchFile(path) {
 
 }
 
-
 export function changeMajor(mid) {
     const url = baseUrl + "/api/v2.3/user/major/one?" + mid;
     const promise = fetch(url, {
