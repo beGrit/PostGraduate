@@ -21,8 +21,7 @@ public class UserUniversityController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public CommonResult<Set<University>> list(HttpSession session) {
-        Long userId = 1L;
-        session.setAttribute("userId", userId);
+        Long userId = getCurUserId(session);
         Set<University> data = service.getConcernedUniversities(userId);
         return CommonResult.success(data);
     }
@@ -31,6 +30,14 @@ public class UserUniversityController {
     public CommonResult change(@RequestParam(value = "oldUid") Long oldUid, @RequestParam(value = "newUid") Long newUid, HttpSession session) throws CrudException {
         Long userId = getCurUserId(session);
         service.changeConcernedUniversity(userId, newUid, oldUid);
+        return CommonResult.success(null);
+    }
+
+
+    @RequestMapping(value = "/one", method = RequestMethod.POST)
+    public CommonResult add(@RequestParam(value = "uid") Long uid, HttpSession session) throws CrudException {
+        Long userId = getCurUserId(session);
+        service.addConcernedUniversity(userId, uid);
         return CommonResult.success(null);
     }
 

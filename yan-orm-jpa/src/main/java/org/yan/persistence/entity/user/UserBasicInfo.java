@@ -14,6 +14,8 @@ public class UserBasicInfo {
 
     private String avatarPath;
 
+    private String email;
+
     public Long getId() {
         return id;
     }
@@ -36,5 +38,13 @@ public class UserBasicInfo {
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

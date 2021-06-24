@@ -143,6 +143,14 @@ public class University {
         this.location = location;
     }
 
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+
     public University() {
     }
 

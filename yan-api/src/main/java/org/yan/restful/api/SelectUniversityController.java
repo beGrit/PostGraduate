@@ -3,10 +3,14 @@ package org.yan.restful.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.yan.common.api.CommonResult;
 import org.yan.common.exception.basic.CrudException;
+import org.yan.persistence.entity.major.MasterMajor;
+import org.yan.persistence.entity.university.University;
 import org.yan.restful.service.SelectUniversityService;
+import org.yan.restful.vo.CityUniversityVO;
 
 import java.util.List;
 
@@ -20,6 +24,12 @@ public class SelectUniversityController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public CommonResult selectViewData() throws CrudException {
         List<Object> data = service.getSelectList();
+        return CommonResult.success(data);
+    }
+
+    @RequestMapping(value = "list/cretira/byMajor", method = RequestMethod.GET)
+    public CommonResult selectViewData(@RequestParam("mid") Long mid) throws CrudException {
+        List<CityUniversityVO> data = service.getSelectListByMajor(mid);
         return CommonResult.success(data);
     }
 }

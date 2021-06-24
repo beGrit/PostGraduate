@@ -1,6 +1,6 @@
 create table UMS_LOCATION
 (
-    id        bigint auto_increment
+    id        bigint not null
         primary key,
     latitude  double null,
     longitude double null

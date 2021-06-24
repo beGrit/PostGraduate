@@ -14,6 +14,7 @@ import org.yan.persistence.entity.university.University;
 import org.yan.persistence.repository.MasterMajorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MasterMajorManagerImpl implements MasterMajorManager {
@@ -50,7 +51,12 @@ public class MasterMajorManagerImpl implements MasterMajorManager {
 
     @Override
     public MasterMajor queryById(Long id) throws QueryException {
-        return null;
+        Optional<MasterMajor> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            throw new QueryException("查找失败");
+        }
     }
 
     @Override

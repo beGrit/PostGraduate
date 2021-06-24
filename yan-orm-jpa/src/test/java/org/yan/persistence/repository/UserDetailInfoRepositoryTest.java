@@ -27,4 +27,10 @@ class UserDetailInfoRepositoryTest {
             System.out.println();
         });
     }
+
+    @Test
+    void countDistinctByUniversity() {
+        int count = repository.countDistinctByUniversity(1L);
+        System.out.println();
+    }
 }
