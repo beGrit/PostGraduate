@@ -1,69 +1,17 @@
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
-import {fetchUniversitySelectList} from "/js/restfulApi.js";
+import {
+    addUserConcernedUniversity,
+    fetchUniversitySelectList,
+    fetchUniversitySelectListByMid,
+    fetchUserConcernedMasterMajor
+} from "/js/restfulApi.js";
 
 window.onload = function () {
-    let defaultData = [
-        {
-            "city": {
-                "id": 1,
-                "name": "北京"
-            },
-            "universities": [
-                {
-                    "id": 1,
-                    "name": "北京大学"
-                },
-                {
-                    "id": 3,
-                    "name": "人民大学"
-                },
-                {
-                    "id": 5,
-                    "name": "清华大学"
-                }
-            ],
-        },
-        {
-            "city": {
-                "id": 2,
-                "name": "广东"
-            },
-            "universities": [
-                {
-                    "id": 2,
-                    "name": "广东大学"
-                },
-                {
-                    "id": 4,
-                    "name": "广东师范大学"
-                }
-            ],
-        },
-        {
-            "city": {
-                "id": 1,
-                "name": "杭州",
-            },
-            "universities": []
-        }
-    ]
-
-    function initialData() {
-        let fetchPromise = fetchUniversitySelectList();
-        fetchPromise.then(response => response.json())
-            .then(json => json["data"])
-            .then(data => {
-                container.render(data);
-            })
-            .catch(reason => {
-                console.log(reason)
-                container.render(defaultData);
-            })
-    }
 
     class UniversityCollection {
         constructor() {
             this.cityList = document.querySelector("#city-list");
+            this.initialData();
         }
 
         render(data) {
@@ -90,11 +38,22 @@ window.onload = function () {
 
                 city.querySelector("span").textContent = item.city.name;
                 if (item.universities !== null && item.universities.length !== 0) {
-                    city.querySelector("i").textContent = item.universities.length;
+                    // city.querySelector("i").textContent = item.universities.
                     for (let university of item.universities) {
                         const newLi = document.createElement("li");
                         newLi.uid = university.id;
                         newLi.textContent = university.name;
+                        newLi.addEventListener("click", evt => {
+                            addUserConcernedUniversity(newLi.uid)
+                                .then(resp => {
+                                    return resp.json();
+                                })
+                                .then(json => {
+                                    if (json.code === 200) {
+                                        history.back();
+                                    }
+                                })
+                        })
                         universityList.appendChild(newLi);
                     }
                 } else {
@@ -104,9 +63,78 @@ window.onload = function () {
                 this.cityList.appendChild(newNode);
             }
         }
+
+        renderDefault() {
+            let defaultData = [
+                {
+                    "city": {
+                        "id": 1,
+                        "name": "北京"
+                    },
+                    "universities": [
+                        {
+                            "id": 1,
+                            "name": "北京大学"
+                        },
+                        {
+                            "id": 3,
+                            "name": "人民大学"
+                        },
+                        {
+                            "id": 5,
+                            "name": "清华大学"
+                        }
+                    ],
+                },
+                {
+                    "city": {
+                        "id": 2,
+                        "name": "广东"
+                    },
+                    "universities": [
+                        {
+                            "id": 2,
+                            "name": "广东大学"
+                        },
+                        {
+                            "id": 4,
+                            "name": "广东师范大学"
+                        }
+                    ],
+                },
+                {
+                    "city": {
+                        "id": 1,
+                        "name": "杭州",
+                    },
+                    "universities": []
+                }
+            ]
+        }
+
+        initialData() {
+            fetchUserConcernedMasterMajor()
+                .then(resp => {
+                    return resp.json();
+                })
+                .then(json => {
+                    return json.data;
+                })
+                .then(data => {
+                    let fetchPromise = fetchUniversitySelectListByMid(data.id);
+                    fetchPromise.then(response => response.json())
+                        .then(json => json.data)
+                        .then(data => {
+                            console.log(data)
+                            this.render(data);
+                        })
+                        .catch(reason => {
+                            console.log(reason)
+                            this.renderDefault();
+                        })
+                });
+        }
     }
 
     const container = new UniversityCollection();
-
-    initialData();
 }

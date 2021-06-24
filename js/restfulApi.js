@@ -1,5 +1,11 @@
 const baseUrl = "http://localhost:1314";
 
+export function fetchUniversitySelectListByMid(mid) {
+    let url = baseUrl + "/api/v2.2/university/selectView/list/cretira/byMajor?" + "mid=" + mid;
+    const promise = fetch(url);
+    return promise;
+}
+
 export function fetchUniversitySelectList() {
     const url = baseUrl + "/api/v2.2/university/selectView/list";
     const promise = fetch(url);
@@ -11,6 +17,14 @@ export function fetchMasterMajorSelectList() {
     const promise = fetch(url);
     return promise;
 }
+
+export function fetchUniversityHeat(uid) {
+    let url = baseUrl + "/api/v2.3/university/heat/one?uid=" + uid;
+    const promise = fetch(url);
+    return promise;
+}
+
+
 
 export function authentication(data) {
     const url = baseUrl + "/api/v2.1/authentication";
@@ -41,6 +55,30 @@ export function fetchUserConcernedMasterMajor() {
     const promise = fetch(url);
     return promise;
 }
+
+export function fetchUserConcernedUniversitiesGrades() {
+    let url = baseUrl + "/api/v2.3/user/UniversityGradesVO/list";
+    const promise = fetch(url);
+    return promise;
+}
+
+export function addUserConcernedUniversity(uid) {
+    let url = baseUrl + "/api/v2.3/user/university/one?uid=" + uid;
+    const promise = fetch(url, {
+        method: "POST"
+    });
+    return promise;
+}
+
+export function changeUserConcernedMasterMajor(mid) {
+    let url = baseUrl + "/api/v2.3/user/major/one?mid=" + mid;
+    const promise = fetch(url, {
+        method: "PUT",
+    });
+    return promise;
+}
+
+
 
 export function fetchGrade(uid, mid) {
     const url = baseUrl + "/api/v2.3/grade/one?uid=" + uid + "&mid=" + mid;

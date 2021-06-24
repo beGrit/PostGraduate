@@ -1,5 +1,5 @@
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
-import {fetchMasterMajorSelectList} from "/js/restfulApi.js";
+import {changeUserConcernedMasterMajor, fetchMasterMajorSelectList} from "/js/restfulApi.js";
 
 window.onload = function () {
     const promise = fetchMasterMajorSelectList();
@@ -11,7 +11,7 @@ window.onload = function () {
             return json.data;
         })
         .then(data => {
-            majorCollection.render2(data);
+            majorCollection.render(data);
         });
 
     let defaultData = [
@@ -44,7 +44,7 @@ window.onload = function () {
             this.majorList = document.querySelector("#major-list");
         }
 
-        render(data) {
+        render2(data) {
             let template = document.createElement("template");
 
             template.innerHTML = `
@@ -90,14 +90,24 @@ window.onload = function () {
             }
         }
 
-        render2(data) {
+        render(data) {
             for (let item of data) {
                 const newLi = document.createElement("li");
                 newLi.textContent = item.name;
+                newLi.addEventListener("click", evt => {
+                    changeUserConcernedMasterMajor(item.id)
+                        .then(resp => {
+                            return resp.json();
+                        })
+                        .then(json => {
+                            if (json.code === 200) {
+                                history.back();
+                            }
+                        })
+                });
                 this.majorList.appendChild(newLi);
             }
         }
-
     }
 
     const majorCollection = new MajorCollection();

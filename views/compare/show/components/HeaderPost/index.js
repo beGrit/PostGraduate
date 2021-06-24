@@ -33,7 +33,6 @@ class HeaderPostComponent extends HTMLElement {
         this.shadowRoot.append(template.content.cloneNode(true));
 
         const resetBtn = this.shadowRoot.querySelector(".university-choice-button-wrapper");
-        console.log(resetBtn)
         resetBtn.addEventListener("click", evt => {
             window.history.back();
         });

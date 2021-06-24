@@ -1,6 +1,6 @@
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
 import {BottomNavComponent} from "/components/BottomNav/index.js";
-import {fetchUserConcernedUniversities} from "/js/restfulApi.js";
+import {fetchUserConcernedMasterMajor, fetchUserConcernedUniversities} from "/js/restfulApi.js";
 
 window.onload = function () {
     // 网络请求区
@@ -14,6 +14,18 @@ window.onload = function () {
         })
         .then(data => {
             universityInfo.initial(data);
+        });
+
+    const promise2 = fetchUserConcernedMasterMajor();
+    promise2
+        .then(resp => {
+            return resp.json();
+        })
+        .then(json => {
+            return json.data;
+        })
+        .then(data => {
+
         });
 
     // 数据处理区
@@ -96,11 +108,12 @@ window.onload = function () {
 
         renderLocation(location) {
             console.log(location)
-            var map = new AMap.Map('map-container', {
+            const mapContainer = document.querySelector("#map-container");
+            const map = new AMap.Map('map-container', {
                 center: [location.latitude, location.longitude],
                 zoom: 13
             });
-            var marker = new AMap.Marker({
+            const marker = new AMap.Marker({
                 position:[location.latitude, location.longitude]//位置
             })
             map.add(marker);
@@ -115,6 +128,8 @@ window.onload = function () {
     selectUniversityElm.addEventListener("change", evt => {
         const value = evt.target.value;
         universityInfo.renderContent(universityInfo.dataList[value]);
+        console.log(universityInfo.dataList[value])
+        universityInfo.renderLocation(universityInfo.dataList[value].location);
     });
 
     const button = document.querySelector("#select-button");

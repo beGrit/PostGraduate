@@ -1,14 +1,18 @@
 import {Component} from "/js/base.js";
-import {initChart} from "/js/grades-compare.js";
+import {initChart,initChart2} from "/js/grades-compare.js";
 import {TopNavBarComponent} from "/components/TopNav/TopNav.js";
 import {HeaderPostComponent} from "/views/compare/show/components/HeaderPost/index.js";
-import {fetchUserConcernedUniversities} from "/js/restfulApi.js";
+import {
+    fetchUniversityHeat,
+    fetchUserConcernedUniversities,
+    fetchUserConcernedUniversitiesGrades
+} from "/js/restfulApi.js";
 
 window.onload = function () {
 
-    function initialData(id1, id2) {
-        let fetchPromise = fetchUserConcernedUniversities();
-        fetchPromise.then(response => response.json())
+    function fetchAndInitial(id1, id2) {
+        let universitiesPromise = fetchUserConcernedUniversities();
+        universitiesPromise.then(response => response.json())
             .then(json => json["data"])
             .then(data => {
                 c1.render(data);
@@ -16,6 +20,7 @@ window.onload = function () {
                 for (let k = 0; k < data.length; k++) {
                     universities.push(data[k]["name"]);
                 }
+                // initialData(data)
                 return universities;
             })
             .then(universities => {
@@ -25,36 +30,24 @@ window.onload = function () {
             .catch(reason => {
                 c1.render(null);
             });
+
+        let universitiesGradesPromise = fetchUserConcernedUniversitiesGrades();
+        universitiesGradesPromise
+            .then(resp => {
+                return resp.json();
+            })
+            .then(json => {
+                if (json.code === 200) {
+                    return json.data;
+                }
+            })
+            .then(data => {
+                initChart2("main",data)
+            });
     }
 
-/*
-    class CompareDetailHeader extends Component {
+    class ContentController{
         constructor(id) {
-            super();
-            this.container = document.querySelector("#" + id);
-        }
-
-        registerPlugin(...plugins) {
-
-        }
-
-        render(data) {
-            const nameWrapper = this.container.querySelector(".university-name-wrapper");
-            const child1 = nameWrapper.firstElementChild;
-            const child2 = child1.nextElementSibling;
-            child1.textContent = data[0];
-            child2.textContent = data[1];
-        }
-    }
-
-    const c2 = new CompareDetailHeader("detail-header");
-*/
-
-
-    /*控件区*/
-    class ContentController extends Component {
-        constructor(id) {
-            super();
             this.container = document.querySelector("#" + id);
             this.buttonList = this.container.querySelectorAll(".content-control__item--selected,.content-control__item");
         }
@@ -93,6 +86,8 @@ window.onload = function () {
                 container.switchPanelByIdx(this.getCurSelectedItemIdx());
             }
         }
+
+
     }
 
     class PanelContainer extends Component {
@@ -105,12 +100,26 @@ window.onload = function () {
         switchPanelByIdx(panelIndex) {
             console.log(panelIndex)
             let oldPosition = this.container.scrollLeft;
-            let targetPosition = 275 * panelIndex;
-            this.container.scrollLeft = targetPosition;
+            let targetPosition = 323 * panelIndex;
+            let t = targetPosition - oldPosition;
+            setTimeout(() => {
+                if (t > 0) {
+                    while (this.container.scrollLeft !== targetPosition) {
+                        this.container.scrollLeft++;
+                    }
+                } else {
+                    while (this.container.scrollLeft !== targetPosition) {
+                        this.container.scrollLeft--;
+                    }
+                }
+            }, 0.5)
+            // this.container.scrollLeft = targetPosition;
+        }
+
+        addPanel(panel) {
+            this.panelList.push(panel);
         }
     }
-
-    /*内容(面板)区*/
 
     /*综合比较面板*/
     class CompositeComparePanel extends Component {
@@ -243,18 +252,25 @@ window.onload = function () {
     }
 
     /*分数线比较面板*/
-    class GradesComparePanel extends Component {
+    class GradesComparePanel {
+        constructor() {
+            this.rootDom = document.querySelector("#grades-compare");
+        }
 
+        render(data) {
+
+        }
     }
 
     const c1 = new CompositeComparePanel("comprehensive-compare");
+    new GradesComparePanel();
     const contentController = new ContentController("content-controller");
     const contentContainer = new PanelContainer();
 
     contentController.bindEvents(contentContainer);
 
-    initialData(1, 2);
-    initChart("main");
+    fetchAndInitial(1, 2);
+
 
     let data = {
         "m_name": "哲学",
