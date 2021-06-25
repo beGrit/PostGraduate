@@ -21,3 +21,4 @@ INSERT INTO YanDatabase.MMS_MASTER_MAJOR_UNIVERSITY_RELATIONSHIP (id, curHasStud
 INSERT INTO YanDatabase.MMS_MASTER_MAJOR_UNIVERSITY_RELATIONSHIP (id, curHasStudents, description, `rank`, theOpeningTime, master_major_id, university_id) VALUES (2, 221, null, 19, '1999-05-11 12:24:42', 2, 2);
 INSERT INTO YanDatabase.MMS_MASTER_MAJOR_UNIVERSITY_RELATIONSHIP (id, curHasStudents, description, `rank`, theOpeningTime, master_major_id, university_id) VALUES (3, 300, null, 20, '2001-05-11 12:25:09', 2, 1);
 INSERT INTO YanDatabase.MMS_MASTER_MAJOR_UNIVERSITY_RELATIONSHIP (id, curHasStudents, description, `rank`, theOpeningTime, master_major_id, university_id) VALUES (4, 100, null, null, '2021-06-09 10:21:53', 1, 3);
+INSERT INTO YanDatabase.MMS_MASTER_MAJOR_UNIVERSITY_RELATIONSHIP (id, curHasStudents, description, `rank`, theOpeningTime, master_major_id, university_id) VALUES (5, 500, null, 2, '2021-06-20 18:20:13', 1, 6);
